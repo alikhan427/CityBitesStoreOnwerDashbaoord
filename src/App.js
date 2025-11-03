@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
+// Pages - direct imports from pages folder
+import Login from "./pages/Login/Login";
+import SignupStore from "./pages/Register/SignupStore";
+import SignupDelivery from "./pages/Register/SignupDelivery";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          {/* 🔐 Login Page */}
+          <Route path="/login" element={<Login />} />
+
+          {/* 🏪 Store Owner Signup */}
+          <Route path="/signup-store" element={<SignupStore />} />
+
+          {/* 🚚 Delivery Boy Signup */}
+          <Route path="/signup-delivery" element={<SignupDelivery />} />
+
+          {/* 🔁 Default Redirect */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </Router>
+    </Provider>
   );
 }
 

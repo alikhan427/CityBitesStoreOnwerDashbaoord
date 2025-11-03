@@ -1,0 +1,136 @@
+.signupstore-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff6b6b, #764ba2);
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+.signupstore-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 3rem;
+  width: 420px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.signupstore-title {
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.signupstore-subtitle {
+  color: #777;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.signupstore-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.signupstore-field label {
+  font-weight: 600;
+  color: #444;
+  text-align: left;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.signupstore-field input {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.signupstore-field input:focus {
+  border-color: #ff6b6b;
+  outline: none;
+}
+
+.upload-label {
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.upload-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.upload-btn {
+  flex: 1;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.upload-btn.gallery {
+  background: #764ba2;
+}
+
+.upload-btn:hover {
+  opacity: 0.9;
+}
+
+.photo-preview img {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.signupstore-submit-btn {
+  background: linear-gradient(135deg, #ff6b6b, #764ba2);
+  color: white;
+  font-weight: 600;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.signupstore-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
+}
+
+.signupstore-footer {
+  margin-top: 1rem;
+  color: #555;
+}
+
+.back-login-btn {
+  background: none;
+  border: 1.5px solid #764ba2;
+  color: #764ba2;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: 0.3s;
+}
+
+.back-login-btn:hover {
+  background: #764ba2;
+  color: white;
+}
