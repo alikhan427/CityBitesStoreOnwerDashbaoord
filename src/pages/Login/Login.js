@@ -1,270 +1,169 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login, clearError } from "../../redux/slices/authSlices";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Smartphone, Lock, Check, X, AlertCircle } from "lucide-react";
-import "./Login.css";
-import Logoo from "../../Assets/Logoo.jpg";
+import { login, clearError, clearMessage } from "../../redux/slices/authSlice";
+import { Eye, EyeOff, Lock } from "lucide-react";
+import logo from "../../assets/images/logo.jpg";
+import "./login.css";
 
 const Login = () => {
-  const [phone, setPhone] = useState("+92");
-  const [pin, setPin] = useState(["", "", "", ""]);
-  const [showPin, setShowPin] = useState(false);
-  const [formErrors, setFormErrors] = useState({});
-  const [isFocused, setIsFocused] = useState({ phone: false });
-  const [phoneValidation, setPhoneValidation] = useState({ isValid: false, isTouched: false });
-
-  const pinRefs = useRef([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { loading, error, isAuthenticated, user } = useSelector((state) => state.auth);
+  const { loading, status } = useSelector((state) => state.auth);
+  const loginStatus = status?.login || {};
 
-  const validatePhone = useCallback((phoneNumber) => {
-    const phoneRegex = /^\+923[0-9]{9}$/;
-    if (!phoneNumber.startsWith("+92")) return "Phone must start with +92";
-    if (phoneNumber.length !== 13) return "Phone must be 13 digits including +92";
-    if (!phoneRegex.test(phoneNumber)) return "Must be a valid Pakistani number (+92XXXXXXXXXX)";
-    return null;
-  }, []);
+  const [formData, setFormData] = useState({
+    phone: "",
+    pin: "",
+  });
 
-  const validatePin = useCallback((pinArray) => {
-    const pinCode = pinArray.join("");
-    if (pinCode.length !== 4) return "PIN must be exactly 4 digits";
-    if (!/^\d+$/.test(pinCode)) return "PIN must contain only numbers";
-    return null;
-  }, []);
+  const [showPin, setShowPin] = useState(false);
+  const [errors, setErrors] = useState({ phone: "", pin: "" });
 
-  const getRedirectPath = useCallback((userData) => {
-    if (!userData?.role) return "/login";
-    return userData.role.toLowerCase() === "admin" ? "/" : "/login";
-  }, []);
-
+  // 🔄 Auto clear backend messages after few seconds
   useEffect(() => {
-    if (isAuthenticated && user) {
-      const redirectPath = getRedirectPath(user);
-      if (redirectPath === "/login") {
-        setFormErrors({ access: "Access denied. Admin privileges required." });
-      } else {
-        navigate(redirectPath, { replace: true });
-      }
+    if (loginStatus.message || loginStatus.error) {
+      const timer = setTimeout(() => {
+        dispatch(clearError("login"));
+        dispatch(clearMessage("login"));
+      }, 3000);
+      return () => clearTimeout(timer);
     }
-  }, [isAuthenticated, user, navigate, getRedirectPath]);
+  }, [loginStatus, dispatch]);
 
-  useEffect(() => {
-    if (error) dispatch(clearError("login"));
-    setFormErrors({});
-  }, [phone, pin, dispatch, error]);
-
-  const handlePhoneChange = (e) => {
-    let value = e.target.value.replace(/(?!^\+)\D/g, "");
-    if (!value.startsWith("+92")) value = "+92" + value.replace(/^\+92/, "").replace(/^\+?/, "");
-    if (value.length > 13) value = value.slice(0, 13);
-    setPhone(value);
-
-    const phoneError = validatePhone(value);
-    setPhoneValidation({ isValid: !phoneError && value.length === 13, isTouched: true });
-    setFormErrors((prev) => ({ ...prev, phone: phoneError }));
+  // 🧠 Input handling
+  const handleChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
-  const handlePinChange = (e, index) => {
-    const value = e.target.value.replace(/\D/g, "").slice(0, 1);
-    const newPin = [...pin];
-    newPin[index] = value;
-    setPin(newPin);
-    if (value && index < 3) setTimeout(() => pinRefs.current[index + 1]?.focus(), 10);
-    else if (!value && index > 0) setTimeout(() => pinRefs.current[index - 1]?.focus(), 10);
+  // ✅ Validation before submit
+  const validate = () => {
+    const newErrors = {};
+    const cleanPhone = formData.phone.replace(/^0+|-/g, "");
+    if (!cleanPhone) newErrors.phone = "Phone number is required";
+    else if (!/^3\d{9}$/.test(cleanPhone))
+      newErrors.phone = "Invalid phone number (3XX-XXXXXXX)";
 
-    const pinError = validatePin(newPin);
-    setFormErrors((prev) => ({ ...prev, pin: pinError }));
+    if (!formData.pin.trim()) newErrors.pin = "PIN is required";
+    else if (formData.pin.length !== 4)
+      newErrors.pin = "PIN must be 4 digits";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  // 🚀 Handle Login
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const phoneError = validatePhone(phone);
-    const pinError = validatePin(pin);
-    const pinCode = pin.join("");
-    if (phoneError || pinError) {
-      setFormErrors({ phone: phoneError, pin: pinError });
-      return;
-    }
-    setFormErrors({});
-    dispatch(clearError("login"));
-    dispatch(login({ phone, pin: pinCode }));
-  };
+    if (!validate()) return;
 
-  const isFormValid = phone.length === 13 && pin.join("").length === 4 && !formErrors.phone && !formErrors.pin;
+    try {
+      const formattedPhone = formData.phone.startsWith("+92")
+        ? formData.phone
+        : `+92${formData.phone.replace(/^0+/, "")}`;
+
+      const credentials = { phone: formattedPhone, pin: formData.pin };
+      const result = await dispatch(login(credentials)).unwrap();
+
+      console.log("✅ Login Success:", result);
+      alert(result.message || "Login successful!");
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("❌ Login Failed:", err);
+    }
+  };
 
   return (
-    <div className="citybites-login-wrapper">
-      <div className="citybites-login-left">
-        <div className="citybites-login-left-content">
-          <img src={Logoo} alt="CityBites Logo" className="citybites-login-logo" />
-          <h1 className="citybites-login-title">Welcome Back to CityBites</h1>
-          <p className="citybites-login-subtitle">For Delivery and Store Owners Dashboard Access Only</p>
+    <div className="login-page">
+      <div className="login-container">
+        <img src={logo} alt="CityBites" className="login-logo" />
+        <h2 className="login-title">Welcome Back</h2>
+        <p className="login-subtitle">Login to your CityBites account</p>
 
-          <div className="citybites-login-feature-list">
-            <div className="citybites-login-feature-item">
-              <div className="citybites-login-feature-icon">👑</div>
-              <span>Admin Privileges Required</span>
+        <form onSubmit={handleLogin} className="login-form">
+          {/* 📱 Phone Input */}
+          <div className="form-group">
+            <label>Phone Number *</label>
+            <div className="input-container phone-input">
+              <span className="country-code">+92</span>
+              <input
+                type="tel"
+                placeholder="3XX-XXXXXXX"
+                value={formData.phone}
+                onChange={(e) => handleChange("phone", e.target.value)}
+                maxLength={10}
+                disabled={loading}
+                className={errors.phone ? "input-error" : ""}
+              />
             </div>
-            <div className="citybites-login-feature-item">
-              <div className="citybites-login-feature-icon">🔒</div>
-              <span>Secure Access Only</span>
+            {errors.phone && <span className="error-text">{errors.phone}</span>}
+          </div>
+
+          {/* 🔒 PIN Input */}
+          <div className="form-group">
+            <label>PIN *</label>
+            <div className="input-container">
+              <input
+                type={showPin ? "text" : "password"}
+                placeholder="Enter 4-digit PIN"
+                value={formData.pin}
+                onChange={(e) => handleChange("pin", e.target.value)}
+                maxLength={4}
+                disabled={loading}
+                className={errors.pin ? "input-error" : ""}
+              />
+              <button
+                type="button"
+                className="toggle-pin"
+                onClick={() => setShowPin(!showPin)}
+              >
+                {showPin ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
             </div>
-            <div className="citybites-login-feature-item">
-              <div className="citybites-login-feature-icon">⚡</div>
-              <span>Full System Control</span>
+            {errors.pin && <span className="error-text">{errors.pin}</span>}
+          </div>
+
+          {/* 🔄 Loading or Error Message */}
+          {loading && <p className="loading-text">Logging in...</p>}
+          {loginStatus.error && (
+            <p className="error-text">{loginStatus.error}</p>
+          )}
+          {loginStatus.message && (
+            <p className="success-text">{loginStatus.message}</p>
+          )}
+
+          <button
+            type="submit"
+            className={`login-btn ${loading ? "disabled-button" : ""}`}
+            disabled={loading}
+          >
+            <Lock size={18} />
+            {loading ? "Logging in..." : "Login"}
+          </button>
+
+          {/* Signup Buttons for Store Owner and Delivery Boy */}
+          <div className="signup-buttons">
+            <p>Don’t have an account? Choose your role:</p>
+            <div className="role-buttons">
+              <button
+                type="button"
+                className="signup-btn store-btn"
+                onClick={() => navigate("/signup-store")}
+              >
+                Signup as Store Owner
+              </button>
+              <button
+                type="button"
+                className="signup-btn delivery-btn"
+                onClick={() => navigate("/signup-delivery")}
+              >
+                Signup as Delivery Boy
+              </button>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="citybites-login-right">
-        <div className="citybites-login-container">
-          <form onSubmit={handleSubmit} className="citybites-login-card" noValidate>
-            <div className="citybites-login-card-header">
-              <h5 className="citybites-login-card-title">Welcome Back 👋</h5>
-              <p className="citybites-login-card-subtitle">
-                "Access to the dashboard is restricted to Store Owners and Delivery Boys with valid credentials."
-              </p>
-            </div>
-
-            {error && (
-              <div className="citybites-login-error-message">
-                <div className="citybites-login-error-icon">⚠</div>
-                <div className="citybites-login-error-text">{error}</div>
-              </div>
-            )}
-            {formErrors.access && (
-              <div className="citybites-login-error-message">
-                <AlertCircle size={18} />
-                <div className="citybites-login-error-text">{formErrors.access}</div>
-              </div>
-            )}
-
-            <div className="citybites-login-input-group">
-              <label htmlFor="phone" className="citybites-login-form-label">
-                <Smartphone size={16} /> Admin Phone Number
-              </label>
-              <div
-                className={`citybites-login-input-wrapper ${isFocused.phone ? "focused" : ""} ${
-                  formErrors.phone ? "error" : ""
-                } ${phoneValidation.isValid ? "valid" : ""}`}
-              >
-                <input
-                  id="phone"
-                  type="tel"
-                  value={phone}
-                  onChange={handlePhoneChange}
-                  onFocus={() => setIsFocused((prev) => ({ ...prev, phone: true }))}
-                  onBlur={() => setIsFocused((prev) => ({ ...prev, phone: false }))}
-                  placeholder="+92 3XX XXXXXXX"
-                  className="citybites-login-form-input"
-                  required
-                  disabled={loading}
-                />
-                {phoneValidation.isTouched && (
-                  <div className="citybites-login-validation-icon">
-                    {phoneValidation.isValid ? (
-                      <Check size={16} className="valid-icon" />
-                    ) : (
-                      <X size={16} className="invalid-icon" />
-                    )}
-                  </div>
-                )}
-              </div>
-              {formErrors.phone && (
-                <div className="citybites-login-field-error">
-                  <span>•</span>
-                  {formErrors.phone}
-                </div>
-              )}
-            </div>
-
-            <div className="citybites-login-input-group">
-              <label className="citybites-login-form-label">
-                <Lock size={16} /> Security PIN
-              </label>
-              <div className="citybites-login-pin-container">
-                <div className={`citybites-login-pin-group ${formErrors.pin ? "error" : ""}`}>
-                  {pin.map((digit, index) => (
-                    <input
-                      key={index}
-                      ref={(el) => (pinRefs.current[index] = el)}
-                      type={showPin ? "text" : "password"}
-                      inputMode="numeric"
-                      maxLength="1"
-                      value={digit}
-                      onChange={(e) => handlePinChange(e, index)}
-                      className="citybites-login-pin-box"
-                      required
-                      disabled={loading}
-                    />
-                  ))}
-                </div>
-                <div className="citybites-login-pin-toggle">
-                  <button
-                    type="button"
-                    className={`citybites-login-toggle-btn ${showPin ? "visible" : ""}`}
-                    onClick={() => setShowPin((s) => !s)}
-                    disabled={loading}
-                  >
-                    {showPin ? <EyeOff size={16} /> : <Eye size={16} />}
-                    <span>{showPin ? "Hide PIN" : "Show PIN"}</span>
-                  </button>
-                </div>
-              </div>
-              {formErrors.pin && (
-                <div className="citybites-login-field-error">
-                  <span>•</span>
-                  {formErrors.pin}
-                </div>
-              )}
-            </div>
-
-            <button
-              type="submit"
-              className={`citybites-login-btn ${!isFormValid || loading ? "disabled" : ""}`}
-              disabled={loading || !isFormValid}
-            >
-              {loading ? (
-                <>
-                  <div className="citybites-login-spinner"></div> Verifying Admin Access...
-                </>
-              ) : (
-                <>
-                  <Lock size={18} /> Access Admin Dashboard
-                </>
-              )}
-            </button>
-
-            <div className="citybites-login-card-footer">
-              <p className="citybites-login-support-text">
-                Don't have an account? Choose your role to sign up:
-              </p>
-              <div className="citybites-login-signup-buttons">
-                <button
-                  type="button"
-                  className="citybites-login-signup-btn store-btn"
-                  onClick={() => navigate("/signup-store")}
-                >
-                  Sign Up as Store Owner
-                </button>
-                <button
-                  type="button"
-                  className="citybites-login-signup-btn delivery-btn"
-                  onClick={() => navigate("/signup-delivery")}
-                >
-                  Sign Up as Delivery Boy
-                </button>
-              </div>
-              <div className="citybites-login-security-notice">
-                <AlertCircle size={14} /> Secure login powered by CityBites
-              </div>
-            </div>
-          </form>
-        </div>
+        </form>
       </div>
     </div>
   );
