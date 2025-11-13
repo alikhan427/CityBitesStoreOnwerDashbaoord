@@ -1,3 +1,5 @@
+/* ===== DELIVERY SIGNUP THEME ===== */
+
 /* Main Wrapper */
 .citybites-signup-wrapper.delivery-signup {
   display: flex;
@@ -7,11 +9,10 @@
   align-items: stretch;
 }
 
-/* LEFT PANEL - Fixed / Non-scrollable (now equal half width) */
-.citybites-signup-left {
-  /* make left take half the width but be flexible */
+/* LEFT PANEL - Fixed / Non-scrollable */
+.citybites-signup-wrapper.delivery-signup .citybites-signup-left {
   flex: 1 1 50%;
-  min-width: 320px;              /* prevent collapsing on narrow desktops */
+  min-width: 320px;
   max-width: 50%;
   display: flex;
   flex-direction: column;
@@ -22,13 +23,14 @@
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow: hidden; /* ensure left does not scroll */
+  overflow: hidden;
   -webkit-overflow-scrolling: touch;
   border-right: 1px solid #e1e5e9;
   box-sizing: border-box;
 }
-/* RIGHT PANEL - Scrollable Form (now equal half width) */
-.citybites-signup-right {
+
+/* RIGHT PANEL - Scrollable Form */
+.citybites-signup-wrapper.delivery-signup .citybites-signup-right {
   flex: 1 1 50%;
   min-width: 320px;
   max-width: 50%;
@@ -38,13 +40,13 @@
   padding: 32px;
   background: white;
   height: 100vh;
-  overflow-y: auto; /* only right side scrolls */
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   box-sizing: border-box;
 }
 
 /* Logo */
-.citybites-logo {
+.citybites-signup-wrapper.delivery-signup .citybites-logo {
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -53,12 +55,13 @@
   object-fit: cover;
 }
 
-/* Left avatar / photo preview (keeps same look) */
-.avatar-preview {
+/* Avatar / Photo Preview */
+.citybites-signup-wrapper.delivery-signup .avatar-preview {
   margin-top: 8px;
   margin-bottom: 18px;
 }
-.avatar-preview img {
+
+.citybites-signup-wrapper.delivery-signup .avatar-preview img {
   display: block;
   border-radius: 12px;
   width: 220px;
@@ -67,7 +70,8 @@
   border: 2px solid #e1e5e9;
 }
 
-.welcome-heading {
+/* Welcome Text */
+.citybites-signup-wrapper.delivery-signup .welcome-heading {
   font-size: 28px;
   font-weight: 700;
   color: #ffffff;
@@ -75,7 +79,7 @@
   text-align: center;
 }
 
-.welcome-subtext {
+.citybites-signup-wrapper.delivery-signup .welcome-subtext {
   font-size: 14px;
   color: #ffffff;
   text-align: center;
@@ -83,7 +87,7 @@
 }
 
 /* Form Card */
-.form-card {
+.citybites-signup-wrapper.delivery-signup .form-card {
   width: 100%;
   max-width: 720px;
   background: white;
@@ -94,8 +98,8 @@
   box-sizing: border-box;
 }
 
-/* Keep form title and subtitle */
-.form-title {
+/* Form Titles */
+.citybites-signup-wrapper.delivery-signup .form-title {
   font-size: 20px;
   font-weight: 700;
   color: #333;
@@ -103,20 +107,20 @@
   text-align: center;
 }
 
-.form-subtitle {
+.citybites-signup-wrapper.delivery-signup .form-subtitle {
   color: #666;
   text-align: center;
   margin-bottom: 16px;
 }
 
 /* Sections */
-.form-section {
+.citybites-signup-wrapper.delivery-signup .form-section {
   margin-bottom: 20px;
   padding-bottom: 14px;
   border-bottom: 1px solid #f1f5f9;
 }
 
-.section-title {
+.citybites-signup-wrapper.delivery-signup .section-title {
   font-size: 15px;
   font-weight: 600;
   color: #333;
@@ -127,11 +131,11 @@
 }
 
 /* Form Group */
-.form-group {
+.citybites-signup-wrapper.delivery-signup .form-group {
   margin-bottom: 14px;
 }
 
-.form-group label {
+.citybites-signup-wrapper.delivery-signup .form-group label {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -141,7 +145,7 @@
 }
 
 /* Input Container */
-.input-container {
+.citybites-signup-wrapper.delivery-signup .input-container {
   display: flex;
   align-items: center;
   border: 1px solid #d1d5db;
@@ -151,12 +155,12 @@
   background: white;
 }
 
-.input-container:focus-within {
-  border-color: #e74c3c; /* original red look from screenshots */
+.citybites-signup-wrapper.delivery-signup .input-container:focus-within {
+  border-color: #e74c3c;
   box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.06);
 }
 
-.input-container input {
+.citybites-signup-wrapper.delivery-signup .input-container input {
   flex: 1;
   border: none;
   outline: none;
@@ -165,25 +169,25 @@
   color: #333;
 }
 
-.input-container input::placeholder {
+.citybites-signup-wrapper.delivery-signup .input-container input::placeholder {
   color: #9ca3af;
 }
 
-.input-container.phone-input {
+.citybites-signup-wrapper.delivery-signup .input-container.phone-input {
   display: flex;
   align-items: center;
 }
 
-.country-code {
+.citybites-signup-wrapper.delivery-signup .country-code {
   font-weight: 600;
   color: #333;
   margin-right: 8px;
 }
 
 /* Select Buttons */
-.vehicle-type-select,
-.working-days-select,
-.time-select-button {
+.citybites-signup-wrapper.delivery-signup .vehicle-type-select,
+.citybites-signup-wrapper.delivery-signup .working-days-select,
+.citybites-signup-wrapper.delivery-signup .time-select-button {
   width: 100%;
   display: flex;
   align-items: center;
@@ -198,32 +202,33 @@
   color: #333;
 }
 
-.vehicle-type-select:active,
-.working-days-select:active,
-.time-select-button:active {
+.citybites-signup-wrapper.delivery-signup .vehicle-type-select:active,
+.citybites-signup-wrapper.delivery-signup .working-days-select:active,
+.citybites-signup-wrapper.delivery-signup .time-select-button:active {
   transform: translateY(1px);
 }
 
-.placeholder-text {
+.citybites-signup-wrapper.delivery-signup .placeholder-text {
   color: #9ca3af;
 }
 
 /* PIN Section */
-.pin-section label {
+.citybites-signup-wrapper.delivery-signup .pin-section label {
   display: block;
   font-weight: 600;
   color: #333;
   margin-bottom: 8px;
 }
 
-.pin-inputs {
+.citybites-signup-wrapper.delivery-signup .pin-inputs {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 80px;
   margin-bottom: 8px;
+  margin-left: 20px;
 }
 
-.pin-inputs input {
+.citybites-signup-wrapper.delivery-signup .pin-inputs input {
   width: 100%;
   height: 52px;
   border: 1px solid #d1d5db;
@@ -235,113 +240,126 @@
   background: white;
 }
 
-.pin-inputs input:focus {
+.citybites-signup-wrapper.delivery-signup .pin-inputs input:focus {
   border-color: #e74c3c;
   box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.06);
 }
 
-.show-pin-btn {
+.citybites-signup-wrapper.delivery-signup .show-pin-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   background: none;
-  border: none;
+  border-style: groove;
   color: #666;
   cursor: pointer;
   font-size: 13px;
   margin-top: 6px;
+  margin-left: 18px;
+  padding-top: 2mm;
+  padding-bottom: 2mm;
+  background: white;
+  border-color: white;
+  border-radius: 2mm;
+  
 }
 
 /* Upload Section */
-.upload-section {
+.citybites-signup-wrapper.delivery-signup .upload-section {
   margin-bottom: 12px;
 }
 
-.upload-header {
+.citybites-signup-wrapper.delivery-signup .upload-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
 }
 
-.upload-title {
+.citybites-signup-wrapper.delivery-signup .upload-title {
   font-weight: 600;
   color: #333;
 }
 
-.required {
+.citybites-signup-wrapper.delivery-signup .required {
   color: #ef4444;
 }
 
-.image-count {
+.citybites-signup-wrapper.delivery-signup .image-count {
   font-size: 13px;
   color: #666;
 }
 
-.upload-options {
+/* Upload Options & Gallery */
+.citybites-signup-wrapper.delivery-signup .upload-options,
+.citybites-signup-wrapper.delivery-signup .gallery-container {
   display: flex;
   gap: 12px;
-}
-
-.upload-option {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 12px;
-  border: 1px dashed #f3b7b3; /* pink/red dashed to match theme */
-  border-radius: 10px;
-  background: #fff7f7;
-  cursor: pointer;
-  transition: all 0.16s ease;
-  min-height: 90px;
-  justify-content: center;
-}
-
-.upload-option:hover {
-  background: #fff0ef;
-}
-
-/* gallery / multiple images */
-.gallery-container {
-  display: flex;
-  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: nowrap;
   overflow-x: auto;
   padding-top: 8px;
   padding-bottom: 8px;
 }
 
-.upload-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 8px;
-  border: 1px dashed #f3b7b3;
-  border-radius: 10px;
-  background: #fff7f7;
-  cursor: pointer;
-  min-width: 120px;
-  height: 120px;
-}
-
-.image-preview-container {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.image-preview {
+/* Unified Upload Tiles */
+.citybites-signup-wrapper.delivery-signup .upload-tile,
+.citybites-signup-wrapper.delivery-signup .image-preview-container,
+.citybites-signup-wrapper.delivery-signup .upload-option,
+.citybites-signup-wrapper.delivery-signup .upload-button {
   width: 120px;
   height: 120px;
-  object-fit: cover;
+  min-width: 120px;
+  min-height: 120px;
   border-radius: 8px;
+  overflow: hidden;
+  background: white;
   border: 1px solid #e1e5e9;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.12s ease;
 }
 
-.remove-image-button {
+/* Upload button specific styles */
+.citybites-signup-wrapper.delivery-signup .upload-option,
+.citybites-signup-wrapper.delivery-signup .upload-button {
+  border: 1px solid #e1e5e9;
+  background: white;
+}
+
+.citybites-signup-wrapper.delivery-signup .upload-option:hover,
+.citybites-signup-wrapper.delivery-signup .upload-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(17, 24, 39, 0.06);
+}
+
+.citybites-signup-wrapper.delivery-signup .upload-option-text,
+.citybites-signup-wrapper.delivery-signup .upload-button-text {
+  font-size: 12px;
+  color: #666;
+  font-weight: 600;
+  text-align: center;
+  padding: 6px 8px;
+}
+
+/* Image Preview */
+.citybites-signup-wrapper.delivery-signup .image-preview,
+.citybites-signup-wrapper.delivery-signup .upload-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+.citybites-signup-wrapper.delivery-signup .remove-image-button {
   position: absolute;
   top: -8px;
   right: -8px;
@@ -359,7 +377,7 @@
 }
 
 /* Modals */
-.modal-overlay {
+.citybites-signup-wrapper.delivery-signup .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -373,7 +391,7 @@
   padding: 16px;
 }
 
-.modal-content {
+.citybites-signup-wrapper.delivery-signup .modal-content {
   background: white;
   border-radius: 12px;
   padding: 16px;
@@ -385,7 +403,7 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
-.modal-title {
+.citybites-signup-wrapper.delivery-signup .modal-title {
   font-size: 16px;
   font-weight: 600;
   color: #333;
@@ -393,10 +411,10 @@
   text-align: center;
 }
 
-/* vehicle / day / time items */
-.vehicle-type-item,
-.day-chip,
-.time-option {
+/* Vehicle/Day/Time Items */
+.citybites-signup-wrapper.delivery-signup .vehicle-type-item,
+.citybites-signup-wrapper.delivery-signup .day-chip,
+.citybites-signup-wrapper.delivery-signup .time-option {
   padding: 10px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
@@ -406,15 +424,15 @@
   color: #333;
 }
 
-.day-chip-active,
-.time-option-active {
+.citybites-signup-wrapper.delivery-signup .day-chip-active,
+.citybites-signup-wrapper.delivery-signup .time-option-active {
   background: #fff0f0;
   border-color: #e74c3c;
   color: #c92b1f;
 }
 
 /* Buttons */
-.verification-button {
+.citybites-signup-wrapper.delivery-signup .verification-button {
   width: 100%;
   padding: 10px;
   background: #e74c3c;
@@ -425,14 +443,14 @@
   cursor: pointer;
 }
 
-.submit-btn {
+.citybites-signup-wrapper.delivery-signup .submit-btn {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   padding: 12px 18px;
-  background: #e74c3c; /* match app CTA red */
+  background: #e74c3c;
   color: white;
   border: none;
   border-radius: 8px;
@@ -442,75 +460,86 @@
   margin-top: 10px;
 }
 
-.submit-btn:active { transform: translateY(1px); }
+.citybites-signup-wrapper.delivery-signup .submit-btn:active {
+  transform: translateY(1px);
+}
 
-.disabled-button {
+.citybites-signup-wrapper.delivery-signup .disabled-button {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
 /* Status Messages */
-.loading-message,
-.error-message,
-.success-message {
+.citybites-signup-wrapper.delivery-signup .loading-message,
+.citybites-signup-wrapper.delivery-signup .error-message,
+.citybites-signup-wrapper.delivery-signup .success-message {
   padding: 12px;
   border-radius: 8px;
   margin: 12px 0;
   border-left: 4px solid;
 }
 
-.loading-message {
+.citybites-signup-wrapper.delivery-signup .loading-message {
   background: #fff5f5;
   border-color: #e74c3c;
   color: #333;
 }
 
-.error-message {
+.citybites-signup-wrapper.delivery-signup .error-message {
   background: #fef2f2;
   border-color: #ef4444;
   color: #333;
 }
 
-.success-message {
+.citybites-signup-wrapper.delivery-signup .success-message {
   background: #f0fdf4;
   border-color: #22c55e;
   color: #333;
 }
 
-.error-text {
+.citybites-signup-wrapper.delivery-signup .error-text {
   color: #ef4444;
   font-size: 13px;
   margin-top: 6px;
 }
 
 /* Login Redirect */
-.login-redirect {
+.citybites-signup-wrapper.delivery-signup .login-redirect {
   text-align: center;
   margin-top: 14px;
   color: #666;
 }
 
-.login-redirect span {
+.citybites-signup-wrapper.delivery-signup .login-redirect span {
   color: #e74c3c;
   font-weight: 600;
   cursor: pointer;
 }
 
-/* Scrollbar Styling (right panel only) */
-.citybites-signup-right::-webkit-scrollbar {
+/* Scrollbar Styling */
+.citybites-signup-wrapper.delivery-signup .citybites-signup-right::-webkit-scrollbar {
   width: 8px;
 }
-.citybites-signup-right::-webkit-scrollbar-track { background: transparent; }
-.citybites-signup-right::-webkit-scrollbar-thumb { background: #f3b7b3; border-radius: 6px; }
 
-/* Responsive Design - Small screens: left stacks on top and becomes non-fixed */
+.citybites-signup-wrapper.delivery-signup .citybites-signup-right::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.citybites-signup-wrapper.delivery-signup .citybites-signup-right::-webkit-scrollbar-thumb {
+  background: #f3b7b3;
+  border-radius: 6px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Small screens: left stacks on top */
 @media (max-width: 880px) {
   .citybites-signup-wrapper.delivery-signup {
     flex-direction: column;
   }
 
-  .citybites-signup-left {
-    position: relative; /* remove sticky on mobile */
+  .citybites-signup-wrapper.delivery-signup .citybites-signup-left {
+    position: relative;
     width: 100%;
     max-width: 100%;
     flex: none;
@@ -521,1143 +550,71 @@
     overflow: visible;
   }
 
-  .citybites-signup-right {
+  .citybites-signup-wrapper.delivery-signup .citybites-signup-right {
+    width: 100%;
+    max-width: 100%;
     height: auto;
     padding: 18px;
     overflow: visible;
   }
 
-  .form-card { box-shadow: none; border: none; padding: 18px; }
-  .avatar-preview img { width: 200px; height: 200px; }
-}
+  .citybites-signup-wrapper.delivery-signup .form-card {
+    box-shadow: none;
+    border: none;
+    padding: 18px;
+  }
 
-/* Extra safety for very narrow viewports */
-@media (max-width: 420px) {
-  .avatar-preview img { width: 140px; height: 140px; border-radius: 10px; }
-  .citybites-logo { width: 80px; height: 80px; }
-  .form-card { padding: 12px; }
-  .input-container { padding: 8px; }
-}
-/* ===== Make upload-option / upload-button match vehicle image style ===== */
+  .citybites-signup-wrapper.delivery-signup .avatar-preview img {
+    width: 200px;
+    height: 200px;
+  }
 
-/* container for upload tiles - keep horizontal scroll */
-.upload-options,
-.gallery-container {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-
-/* unified tile base (used by preview tiles and upload tiles) */
-.upload-tile,
-.image-preview-container {
-  width: 120px;
-  height: 120px;
-  min-width: 120px;
-  min-height: 120px;
-  border-radius: 8px;
-  overflow: hidden;
-  background: white;
-  border: 1px solid #e1e5e9;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  box-sizing: border-box;
-}
-
-/* uploaded image itself (already exists as .image-preview) */
-.image-preview,
-.upload-tile img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Replace old dashed/pink upload look with preview-like tile */
-.upload-option,
-.upload-button {
-  /* make them look exactly like a preview tile */
-  background: white;
-  border: 1px solid #e1e5e9;
-  border-radius: 8px;
-  width: 120px;
-  height: 120px;
-  min-width: 120px;
-  min-height: 120px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 6px;
-  padding: 0;
-  cursor: pointer;
-  transition: all 0.12s ease;
-  box-sizing: border-box;
-}
-
-/* small inner area for icon + text */
-.upload-option .upload-option-text,
-.upload-button .upload-button-text {
-  font-size: 12px;
-  color: #666;
-  font-weight: 600;
-  text-align: center;
-  padding: 6px 8px;
-}
-
-/* camera icon alignment */
-.upload-option svg,
-.upload-button svg {
-  opacity: 0.95;
-}
-
-/* hover state — subtle elevation */
-.upload-option:hover,
-.upload-button:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(17, 24, 39, 0.06);
-}
-
-/* keep remove button exactly same */
-.remove-image-button {
-  top: -8px;
-  right: -8px;
-  width: 26px;
-  height: 26px;
-  font-size: 12px;
-}
-
-/* when there's text-only (no icon) center it */
-.upload-option-text {
-  display: block;
-  line-height: 1.1;
-}
-
-/* allow upload tiles to show an uploaded preview image by placing an <img> inside */
-.upload-tile img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* If you want the upload tiles to still show the pink background when empty, use this optional rule:
-.upload-option:empty { background: #fff7f7; border: 1px dashed #f3b7b3; }
-*/
-
-/* Preserve previous mobile scaling */
-@media (max-width: 880px) {
-  .upload-option,
-  .upload-button,
-  .image-preview,
-  .upload-tile {
+  /* Mobile upload tile scaling */
+  .citybites-signup-wrapper.delivery-signup .upload-option,
+  .citybites-signup-wrapper.delivery-signup .upload-button,
+  .citybites-signup-wrapper.delivery-signup .image-preview,
+  .citybites-signup-wrapper.delivery-signup .upload-tile {
     width: 100px;
     height: 100px;
     min-width: 100px;
     min-height: 100px;
-    border-radius: 8px;
   }
 }
 
+/* Extra small screens */
 @media (max-width: 420px) {
-  .upload-option,
-  .upload-button,
-  .image-preview,
-  .upload-tile {
+  .citybites-signup-wrapper.delivery-signup .avatar-preview img {
+    width: 140px;
+    height: 140px;
+    border-radius: 10px;
+  }
+
+  .citybites-signup-wrapper.delivery-signup .citybites-logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .citybites-signup-wrapper.delivery-signup .form-card {
+    padding: 12px;
+  }
+
+  .citybites-signup-wrapper.delivery-signup .input-container {
+    padding: 8px;
+  }
+
+  /* Smaller upload tiles for very small screens */
+  .citybites-signup-wrapper.delivery-signup .upload-option,
+  .citybites-signup-wrapper.delivery-signup .upload-button,
+  .citybites-signup-wrapper.delivery-signup .image-preview,
+  .citybites-signup-wrapper.delivery-signup .upload-tile {
     width: 84px;
     height: 84px;
     min-width: 84px;
     min-height: 84px;
-    border-radius: 8px;
   }
 
-  .upload-option .upload-option-text,
-  .upload-button .upload-button-text {
+  .citybites-signup-wrapper.delivery-signup .upload-option-text,
+  .citybites-signup-wrapper.delivery-signup .upload-button-text {
     font-size: 11px;
-  }
-}
-/* Main Wrapper - Store Theme */
-.citybites-signup-wrapper.store-signup {
-  display: flex;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow: hidden;
-  align-items: stretch;
-}
-
-/* LEFT PANEL - Fixed / Non-scrollable */
-.citybites-signup-wrapper.store-signup .citybites-signup-left {
-  flex: 0 0 45%;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 3rem;
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 45%;
-  overflow: hidden;
-  color: white;
-  border-right: 1px solid #333;
-}
-
-/* RIGHT PANEL - Scrollable Form */
-.citybites-signup-wrapper.store-signup .citybites-signup-right {
-  flex: 0 0 55%;
-  margin-left: 45%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 3rem 2rem;
-  overflow-y: auto;
-  background: #ffffff;
-}
-
-/* Logo - Store Theme */
-.citybites-signup-wrapper.store-signup .citybites-logo {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin-bottom: 2rem;
-  object-fit: cover;
-  border: 3px solid #ffffff;
-  box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
-}
-
-/* Welcome Text - Store Theme */
-.citybites-signup-wrapper.store-signup .welcome-heading {
-  color: white;
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-align: center;
-  line-height: 1.2;
-  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.citybites-signup-wrapper.store-signup .welcome-subtext {
-  color: #b0b0b0;
-  font-size: 1.3rem;
-  text-align: center;
-  max-width: 400px;
-  margin-bottom: 3rem;
-  font-weight: 300;
-  line-height: 1.5;
-}
-
-/* Form Card - Store Theme */
-.citybites-signup-wrapper.store-signup .form-card {
-  background: white;
-  border-radius: 15px;
-  padding: 3rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-  width: 100%;
-  margin: 0 auto;
-  border: 1px solid #e1e5e9;
-}
-
-.citybites-signup-wrapper.store-signup .form-title {
-  color: #333;
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  text-align: center;
-}
-
-.citybites-signup-wrapper.store-signup .form-subtitle {
-  color: #666;
-  text-align: center;
-  margin-bottom: 2.5rem;
-  font-size: 1.1rem;
-  font-weight: 400;
-}
-
-/* Form Sections - Store Theme */
-.citybites-signup-wrapper.store-signup .form-section {
-  margin-bottom: 2.5rem;
-}
-
-.citybites-signup-wrapper.store-signup .section-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid #f0f0f0;
-}
-
-/* Form Groups - Store Theme */
-.citybites-signup-wrapper.store-signup .form-group {
-  margin-bottom: 1.8rem;
-}
-
-.citybites-signup-wrapper.store-signup .form-group label {
-  display: block;
-  margin-bottom: 0.75rem;
-  font-weight: 600;
-  color: #333;
-  font-size: 1rem;
-}
-
-/* Input Container - Store Theme */
-.citybites-signup-wrapper.store-signup .input-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  border: 2px solid #e1e5e9;
-  border-radius: 10px;
-  padding: 0.9rem 1.2rem;
-  transition: all 0.3s ease;
-  background: #fff;
-}
-
-.citybites-signup-wrapper.store-signup .input-container:focus-within {
-  border-color: #FF6B6B;
-  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
-}
-
-.citybites-signup-wrapper.store-signup .input-container input {
-  border: none;
-  outline: none;
-  width: 100%;
-  font-size: 1rem;
-  background: transparent;
-  color: #333;
-}
-
-.citybites-signup-wrapper.store-signup .input-container input::placeholder {
-  color: #999;
-}
-
-.citybites-signup-wrapper.store-signup .phone-input {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.citybites-signup-wrapper.store-signup .country-code {
-  font-weight: 600;
-  color: #FF6B6B;
-  white-space: nowrap;
-  font-size: 1rem;
-}
-
-/* Category Select - Store Theme */
-.citybites-signup-wrapper.store-signup .category-select {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.9rem 1.2rem;
-  border: 2px solid #e1e5e9;
-  border-radius: 10px;
-  background: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1rem;
-  color: #333;
-}
-
-.citybites-signup-wrapper.store-signup .category-select:hover {
-  border-color: #FF6B6B;
-}
-
-.citybites-signup-wrapper.store-signup .dropdown-icon {
-  transition: transform 0.3s ease;
-}
-
-.citybites-signup-wrapper.store-signup .category-select:hover .dropdown-icon {
-  transform: rotate(180deg);
-}
-
-/* Working Days - Store Theme */
-.citybites-signup-wrapper.store-signup .working-days-select {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.9rem 1.2rem;
-  border: 2px solid #e1e5e9;
-  border-radius: 10px;
-  background: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1rem;
-  color: #333;
-}
-
-.citybites-signup-wrapper.store-signup .working-days-select:hover {
-  border-color: #FF6B6B;
-}
-
-/* Time Selection - Store Theme */
-.citybites-signup-wrapper.store-signup .time-selection {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.citybites-signup-wrapper.store-signup .time-input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.citybites-signup-wrapper.store-signup .time-input-group label {
-  font-weight: 600;
-  color: #333;
-  font-size: 0.9rem;
-}
-
-.citybites-signup-wrapper.store-signup .time-select-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.9rem 1rem;
-  border: 2px solid #e1e5e9;
-  border-radius: 10px;
-  background: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1rem;
-  color: #333;
-}
-
-.citybites-signup-wrapper.store-signup .time-select-button:hover {
-  border-color: #FF6B6B;
-  background: #fff5f5;
-}
-
-/* Form Row - Store Theme */
-.citybites-signup-wrapper.store-signup .form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-/* PIN Section - Store Theme */
-.citybites-signup-wrapper.store-signup .pin-section {
-  margin-bottom: 2.2rem;
-}
-
-.citybites-signup-wrapper.store-signup .pin-section label {
-  display: block;
-  margin-bottom: 0.75rem;
-  font-weight: 600;
-  color: #333;
-  font-size: 1rem;
-}
-
-.citybites-signup-wrapper.store-signup .pin-inputs {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
-  justify-content: space-between;
-}
-
-.citybites-signup-wrapper.store-signup .pin-inputs input {
-  width: 70px;
-  height: 70px;
-  border: 2px solid #e1e5e9;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  background: #fff;
-  color: #333;
-}
-
-.citybites-signup-wrapper.store-signup .pin-inputs input:focus {
-  border-color: #FF6B6B;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
-}
-
-.citybites-signup-wrapper.store-signup .show-pin-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: #f8f9fa;
-  border: 1px solid #e1e5e9;
-  color: #666;
-  cursor: pointer;
-  font-size: 0.9rem;
-  margin-left: auto;
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-}
-
-.citybites-signup-wrapper.store-signup .show-pin-btn:hover {
-  background: #e9ecef;
-  color: #333;
-}
-
-/* Upload Sections - Store Theme */
-.citybites-signup-wrapper.store-signup .upload-section {
-  margin-bottom: 2.2rem;
-}
-
-.citybites-signup-wrapper.store-signup .upload-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.citybites-signup-wrapper.store-signup .upload-title {
-  font-weight: 600;
-  color: #333;
-  font-size: 1.1rem;
-}
-
-.citybites-signup-wrapper.store-signup .required {
-  color: #FF6B6B;
-}
-
-.citybites-signup-wrapper.store-signup .image-count {
-  font-size: 0.9rem;
-  color: #666;
-  background: #f8f9fa;
-  padding: 0.3rem 0.7rem;
-  border-radius: 20px;
-}
-
-/* Image Preview - Store Theme */
-.citybites-signup-wrapper.store-signup .single-image-container {
-  margin-bottom: 1rem;
-}
-
-.citybites-signup-wrapper.store-signup .image-preview-container {
-  position: relative;
-  display: inline-block;
-}
-
-.citybites-signup-wrapper.store-signup .image-preview {
-  width: 140px;
-  height: 140px;
-  border-radius: 10px;
-  object-fit: cover;
-  border: 2px solid #e1e5e9;
-}
-
-.citybites-signup-wrapper.store-signup .remove-image-button {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background: #FF6B6B;
-  border: none;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: white;
-  font-size: 0.75rem;
-  transition: all 0.3s ease;
-  border: 2px solid white;
-}
-
-.citybites-signup-wrapper.store-signup .remove-image-button:hover {
-  background: #e55a5a;
-  transform: scale(1.1);
-}
-
-/* Upload Buttons - Store Theme */
-.citybites-signup-wrapper.store-signup .upload-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 140px;
-  height: 140px;
-  border: 2px dashed #e1e5e9;
-  border-radius: 10px;
-  background: #f8f9fa;
-  cursor: pointer;
-  color: #666;
-  transition: all 0.3s ease;
-  flex-shrink: 0;
-}
-
-.citybites-signup-wrapper.store-signup .upload-button:hover:not(.disabled-button) {
-  border-color: #FF6B6B;
-  color: #FF6B6B;
-  background: #fff5f5;
-}
-
-.citybites-signup-wrapper.store-signup .upload-button-text {
-  margin-top: 0.75rem;
-  font-size: 0.9rem;
-  text-align: center;
-  font-weight: 500;
-}
-
-/* Gallery Container - Store Theme */
-.citybites-signup-wrapper.store-signup .gallery-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 1rem;
-}
-
-/* Upload Options - Store Theme */
-.citybites-signup-wrapper.store-signup .upload-options {
-  display: flex;
-  gap: 1rem;
-}
-
-.citybites-signup-wrapper.store-signup .upload-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  padding: 2rem 1rem;
-  border: 2px dashed #e1e5e9;
-  border-radius: 10px;
-  background: #f8f9fa;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: #666;
-}
-
-.citybites-signup-wrapper.store-signup .upload-option:hover:not(.disabled-button) {
-  border-color: #FF6B6B;
-  color: #FF6B6B;
-  background: #fff5f5;
-}
-
-.citybites-signup-wrapper.store-signup .upload-option-text {
-  margin-top: 0.75rem;
-  font-size: 0.9rem;
-  text-align: center;
-  font-weight: 500;
-}
-
-/* Location Section - Store Theme */
-.citybites-signup-wrapper.store-signup .location-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.citybites-signup-wrapper.store-signup .location-info {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 1.5rem;
-  border: 2px solid #e1e5e9;
-  border-radius: 10px;
-  background: #f8f9fa;
-  margin-bottom: 1rem;
-}
-
-.citybites-signup-wrapper.store-signup .location-details {
-  flex: 1;
-}
-
-.citybites-signup-wrapper.store-signup .location-text {
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 0.5rem;
-  line-height: 1.4;
-}
-
-.citybites-signup-wrapper.store-signup .location-coordinates {
-  font-size: 0.875rem;
-  color: #666;
-  margin-bottom: 0.75rem;
-  font-family: monospace;
-  background: white;
-  padding: 0.4rem 0.75rem;
-  border-radius: 6px;
-  border: 1px solid #e1e5e9;
-}
-
-.citybites-signup-wrapper.store-signup .change-location-btn {
-  background: #6c757d;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.875rem;
-  transition: all 0.3s ease;
-}
-
-.citybites-signup-wrapper.store-signup .change-location-btn:hover {
-  background: #5a6268;
-}
-
-.citybites-signup-wrapper.store-signup .get-location-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  width: 100%;
-  padding: 1rem 1.5rem;
-  border: 2px dashed #e1e5e9;
-  border-radius: 10px;
-  background: #f8f9fa;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1rem;
-  color: #666;
-  font-weight: 500;
-}
-
-.citybites-signup-wrapper.store-signup .get-location-btn:hover:not(:disabled) {
-  border-color: #FF6B6B;
-  color: #FF6B6B;
-  background: #fff5f5;
-}
-
-/* Submit Button - Store Theme */
-.citybites-signup-wrapper.store-signup .submit-btn {
-  width: 100%;
-  padding: 1.25rem;
-  background: linear-gradient(135deg, #FF6B6B 0%, #e55a5a 100%);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  transition: all 0.3s ease;
-  margin: 2.5rem 0 1.5rem 0;
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-}
-
-.citybites-signup-wrapper.store-signup .submit-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-}
-
-.citybites-signup-wrapper.store-signup .disabled-button {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none !important;
-}
-
-/* Login Redirect - Store Theme */
-.citybites-signup-wrapper.store-signup .login-redirect {
-  text-align: center;
-  color: #666;
-  font-size: 1rem;
-  border-top: 1px solid #e1e5e9;
-  padding-top: 1.5rem;
-}
-
-.citybites-signup-wrapper.store-signup .login-redirect span {
-  color: #FF6B6B;
-  cursor: pointer;
-  font-weight: 600;
-  margin-left: 0.25rem;
-  text-decoration: none;
-}
-
-.citybites-signup-wrapper.store-signup .login-redirect span:hover {
-  text-decoration: underline;
-}
-
-/* Modal Styles - Store Theme */
-.citybites-signup-wrapper.store-signup .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 1rem;
-}
-
-.citybites-signup-wrapper.store-signup .modal-content {
-  background: white;
-  border-radius: 15px;
-  padding: 2rem;
-  width: 100%;
-  max-width: 400px;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  border: 1px solid #e1e5e9;
-}
-
-.citybites-signup-wrapper.store-signup .modal-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-/* Category List Modal - Store Theme */
-.citybites-signup-wrapper.store-signup .category-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.citybites-signup-wrapper.store-signup .category-item {
-  padding: 1rem 1.5rem;
-  border: 1px solid #e1e5e9;
-  background: white;
-  text-align: left;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  font-size: 1rem;
-  color: #333;
-}
-
-.citybites-signup-wrapper.store-signup .category-item:hover {
-  background: #f8f9fa;
-  border-color: #FF6B6B;
-  color: #FF6B6B;
-}
-
-/* Days Grid - Store Theme */
-.citybites-signup-wrapper.store-signup .days-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-}
-
-.citybites-signup-wrapper.store-signup .day-chip {
-  padding: 0.75rem 0.5rem;
-  border: 2px solid #e1e5e9;
-  background: white;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.citybites-signup-wrapper.store-signup .day-chip:hover {
-  border-color: #FF6B6B;
-  background: #fff5f5;
-}
-
-.citybites-signup-wrapper.store-signup .day-chip-active {
-  background: #FF6B6B;
-  color: white;
-  border-color: #FF6B6B;
-}
-
-/* Time Modal - Store Theme */
-.citybites-signup-wrapper.store-signup .time-modal {
-  max-width: 500px;
-  max-height: 70vh;
-}
-
-.citybites-signup-wrapper.store-signup .time-options {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-  max-height: 50vh;
-  overflow-y: auto;
-  padding: 0.5rem;
-}
-
-.citybites-signup-wrapper.store-signup .time-option {
-  padding: 0.75rem 0.5rem;
-  border: 1px solid #e1e5e9;
-  background: white;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-.citybites-signup-wrapper.store-signup .time-option:hover {
-  border-color: #FF6B6B;
-  background: #fff5f5;
-}
-
-.citybites-signup-wrapper.store-signup .time-option-active {
-  background: #FF6B6B;
-  color: white;
-  border-color: #FF6B6B;
-}
-
-/* Verification Button - Store Theme */
-.citybites-signup-wrapper.store-signup .verification-button {
-  width: 100%;
-  padding: 1rem;
-  background: #FF6B6B;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 1rem;
-}
-
-.citybites-signup-wrapper.store-signup .verification-button:hover {
-  background: #e55a5a;
-  transform: translateY(-1px);
-}
-
-/* Status Messages - Store Theme */
-.citybites-signup-wrapper.store-signup .loading-message {
-  background: #FFF5F5;
-  padding: 1rem 1.5rem;
-  border-radius: 10px;
-  border-left: 4px solid #FF6B6B;
-  margin-bottom: 1.5rem;
-}
-
-.citybites-signup-wrapper.store-signup .loading-message span {
-  color: #D32F2F;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.citybites-signup-wrapper.store-signup .error-message {
-  background: #FFF5F5;
-  padding: 1rem 1.5rem;
-  border-radius: 10px;
-  border-left: 4px solid #D32F2F;
-  margin-bottom: 1.5rem;
-}
-
-.citybites-signup-wrapper.store-signup .success-message {
-  background: #F0F9F0;
-  padding: 1rem 1.5rem;
-  border-radius: 10px;
-  border-left: 4px solid #4CAF50;
-  margin-bottom: 1.5rem;
-}
-
-.citybites-signup-wrapper.store-signup .success-text {
-  color: #2E7D32;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.citybites-signup-wrapper.store-signup .error-text {
-  color: #D32F2F;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-  display: block;
-  font-weight: 500;
-}
-
-/* Loading Spinner - Store Theme */
-.citybites-signup-wrapper.store-signup .loading-spinner {
-  width: 24px;
-  height: 24px;
-  border: 3px solid #f3f3f3;
-  border-top: 3px solid #FF6B6B;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-.citybites-signup-wrapper.store-signup .small {
-  width: 20px;
-  height: 20px;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Error States - Store Theme */
-.citybites-signup-wrapper.store-signup .input-error {
-  border-color: #D32F2F !important;
-}
-
-/* Scrollbar Styling - Store Theme */
-.citybites-signup-wrapper.store-signup .time-options::-webkit-scrollbar {
-  width: 6px;
-}
-
-.citybites-signup-wrapper.store-signup .time-options::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 3px;
-}
-
-.citybites-signup-wrapper.store-signup .time-options::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 3px;
-}
-
-.citybites-signup-wrapper.store-signup .time-options::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
-}
-
-/* Focus States for Accessibility - Store Theme */
-.citybites-signup-wrapper.store-signup .category-select:focus,
-.citybites-signup-wrapper.store-signup .working-days-select:focus,
-.citybites-signup-wrapper.store-signup .time-select-button:focus,
-.citybites-signup-wrapper.store-signup .get-location-btn:focus {
-  outline: none;
-  border-color: #FF6B6B;
-  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
-}
-
-/* Disabled States - Store Theme */
-.citybites-signup-wrapper.store-signup .category-select:disabled,
-.citybites-signup-wrapper.store-signup .working-days-select:disabled,
-.citybites-signup-wrapper.store-signup .time-select-button:disabled,
-.citybites-signup-wrapper.store-signup .get-location-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  background: #f8f9fa;
-}
-
-.citybites-signup-wrapper.store-signup .category-select:disabled:hover,
-.citybites-signup-wrapper.store-signup .working-days-select:disabled:hover,
-.citybites-signup-wrapper.store-signup .time-select-button:disabled:hover,
-.citybites-signup-wrapper.store-signup .get-location-btn:disabled:hover {
-  border-color: #e1e5e9;
-  background: #f8f9fa;
-  color: #666;
-}
-
-/* Responsive Design - Store Theme */
-@media (max-width: 1024px) {
-  .citybites-signup-wrapper.store-signup .citybites-signup-left {
-    flex: 0 0 40%;
-    width: 40%;
-  }
-  
-  .citybites-signup-wrapper.store-signup .citybites-signup-right {
-    flex: 0 0 60%;
-    margin-left: 40%;
-  }
-}
-
-@media (max-width: 768px) {
-  .citybites-signup-wrapper.store-signup {
-    flex-direction: column;
-  }
-  
-  .citybites-signup-wrapper.store-signup .citybites-signup-left {
-    position: relative;
-    width: 100%;
-    flex: none;
-    padding: 2rem 1rem;
-  }
-  
-  .citybites-signup-wrapper.store-signup .citybites-signup-right {
-    margin-left: 0;
-    flex: none;
-    width: 100%;
-    padding: 1rem;
-    background: #ffffff;
-  }
-  
-  .citybites-signup-wrapper.store-signup .form-card {
-    margin: -2rem 0 0 0;
-    padding: 2rem 1.5rem;
-  }
-  
-  .citybites-signup-wrapper.store-signup .pin-inputs input {
-    width: 60px;
-    height: 60px;
-    font-size: 1.25rem;
-  }
-  
-  .citybites-signup-wrapper.store-signup .image-preview,
-  .citybites-signup-wrapper.store-signup .upload-button {
-    width: 120px;
-    height: 120px;
-  }
-  
-  .citybites-signup-wrapper.store-signup .form-row {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-  
-  .citybites-signup-wrapper.store-signup .time-selection {
-    grid-template-columns: 1fr;
-  }
-  
-  .citybites-signup-wrapper.store-signup .days-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  .citybites-signup-wrapper.store-signup .time-options {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .citybites-signup-wrapper.store-signup .gallery-container {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  }
-}
-
-@media (max-width: 480px) {
-  .citybites-signup-wrapper.store-signup .citybites-signup-left {
-    padding: 1.5rem 1rem;
-  }
-  
-  .citybites-signup-wrapper.store-signup .welcome-heading {
-    font-size: 2.2rem;
-  }
-  
-  .citybites-signup-wrapper.store-signup .form-card {
-    padding: 1.5rem 1rem;
-  }
-  
-  .citybites-signup-wrapper.store-signup .pin-inputs {
-    gap: 0.5rem;
-  }
-  
-  .citybites-signup-wrapper.store-signup .pin-inputs input {
-    width: 55px;
-    height: 55px;
-    font-size: 1.1rem;
-  }
-  
-  .citybites-signup-wrapper.store-signup .days-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .citybites-signup-wrapper.store-signup .time-options {
-    grid-template-columns: 1fr;
-  }
-  
-  .citybites-signup-wrapper.store-signup .upload-options {
-    flex-direction: column;
-  }
-  
-  .citybites-signup-wrapper.store-signup .gallery-container {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
