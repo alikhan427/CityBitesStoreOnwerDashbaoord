@@ -224,6 +224,7 @@ export const getMe = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.get('/auth/me');
+      
       const payload = response.data || {};
       const token = localStorage.getItem('token');
       saveAuthState(payload.user, token);
@@ -511,3 +512,4 @@ export const {
 } = authSlice.actions;
 
 export default authSlice.reducer;
+

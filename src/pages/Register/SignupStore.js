@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { Eye, EyeOff, Lock, Camera, X, Clock, Calendar, Store, User, Phone, Hash, CreditCard, Building, ChevronDown, MapPin, DollarSign, Truck, Watch } from "lucide-react";
+import { Eye, EyeOff, Lock, Camera, X, Clock, Calendar, Store, User, Phone, CreditCard, Building, ChevronDown, MapPin, DollarSign, Truck, Watch } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { 
@@ -8,6 +8,7 @@ import {
   clearMessage, 
   clearRegistrationSuccess 
 } from "../../redux/slices/authSlice";
+import locationService from "../services/locationService"; // Import your location service
 import "./SignupStore.css";
 import logo from "../../assets/images/logo.jpg";
 
@@ -89,6 +90,20 @@ const SignupStore = () => {
     storeImages: React.createRef(),
   });
 
+  // Initialize location service
+  useEffect(() => {
+    const initLocationService = async () => {
+      try {
+        await locationService.initialize();
+        console.log("📍 Location service initialized");
+      } catch (error) {
+        console.error("❌ Failed to initialize location service:", error);
+      }
+    };
+    
+    initLocationService();
+  }, []);
+
   // Add success effect
   useEffect(() => {
     if (registrationSuccess && registerStatus.message) {
@@ -141,7 +156,7 @@ const SignupStore = () => {
     };
   }, [dispatch, cleanupObjectURLs]);
 
-  // PIN handling functions - SAME AS DELIVERY
+  // PIN handling functions
   const handlePinChange = (text, index, pinArray, setPinFunction, refs, fieldName) => {
     if (!/^\d*$/.test(text)) return;
 
@@ -164,7 +179,7 @@ const SignupStore = () => {
     }
   };
 
-  // File handling functions - SAME AS DELIVERY
+  // File handling functions
   const handleFileSelect = (type, isMultiple = false) => {
     setCurrentUploadType(type);
     setUploading(true);
@@ -279,7 +294,7 @@ const SignupStore = () => {
     );
   };
 
-  // Time handling - SAME AS DELIVERY
+  // Time handling
   const generateTimeOptions = () => {
     const times = [];
     for (let hour = 0; hour < 24; hour++) {
@@ -291,8 +306,8 @@ const SignupStore = () => {
     return times;
   };
 
-  // Location handling
-  const getCurrentLocation = () => {
+  // ✅ IMPROVED Location handling using your location service
+  const getCurrentLocation = async () => {
     setLocationLoading(true);
     setLocationError("");
 
@@ -302,51 +317,104 @@ const SignupStore = () => {
       return;
     }
 
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true,
+          timeout: 15000,
+          maximumAge: 60000
+        });
+      });
+
+      const { latitude, longitude } = position.coords;
+      
+      console.log("📍 Coordinates obtained:", latitude, longitude);
+
+      // Try to get detailed location info using your service
+      try {
+        const locationDetails = await locationService.reverseGeocodeWithDetails(latitude, longitude);
         
-        // Set coordinates
+        if (locationDetails) {
+          console.log("📍 Detailed location found:", locationDetails);
+          
+          setFormValues(prev => ({
+            ...prev,
+            latitude: latitude.toString(),
+            longitude: longitude.toString(),
+            address: locationDetails.fullAddress || "Location captured",
+            city: locationDetails.city || "",
+            state: locationDetails.state || "",
+            country: locationDetails.country || "",
+            countryCode: locationDetails.countryCode || ""
+          }));
+          
+          setLocationLoading(false);
+          return;
+        }
+      } catch (geocodeError) {
+        console.warn("⚠️ Detailed geocoding failed, trying approximate:", geocodeError);
+      }
+
+      // Fallback to approximate location
+      try {
+        const approximateLocation = await locationService.getApproximateLocationDetails(latitude, longitude);
+        
+        if (approximateLocation) {
+          console.log("📍 Approximate location found:", approximateLocation);
+          
+          setFormValues(prev => ({
+            ...prev,
+            latitude: latitude.toString(),
+            longitude: longitude.toString(),
+            address: approximateLocation.fullAddress || `Location: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`,
+            city: approximateLocation.city || "",
+            state: approximateLocation.state || "",
+            country: approximateLocation.country || "",
+            countryCode: approximateLocation.countryCode || ""
+          }));
+        } else {
+          // Final fallback - just coordinates
+          setFormValues(prev => ({
+            ...prev,
+            latitude: latitude.toString(),
+            longitude: longitude.toString(),
+            address: `Location: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`
+          }));
+        }
+      } catch (approximateError) {
+        console.error("❌ Approximate location failed:", approximateError);
+        // Basic coordinates as last resort
         setFormValues(prev => ({
           ...prev,
           latitude: latitude.toString(),
-          longitude: longitude.toString()
+          longitude: longitude.toString(),
+          address: `Location: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`
         }));
-
-        // Reverse geocode to get address
-        fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
-          .then(response => response.json())
-          .then(data => {
-            setFormValues(prev => ({
-              ...prev,
-              address: data.locality || data.city || "Address not available",
-              city: data.city || "",
-              state: data.principalSubdivision || "",
-              country: data.countryName || "",
-              countryCode: data.countryCode || ""
-            }));
-            setLocationLoading(false);
-          })
-          .catch(error => {
-            console.error("Geocoding error:", error);
-            setFormValues(prev => ({
-              ...prev,
-              address: "Location captured (address lookup failed)"
-            }));
-            setLocationLoading(false);
-          });
-      },
-      (error) => {
-        console.error("Geolocation error:", error);
-        setLocationError("Failed to get location. Please enable location permissions and try again.");
-        setLocationLoading(false);
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 60000
       }
-    );
+
+      setLocationLoading(false);
+      
+    } catch (error) {
+      console.error("❌ Geolocation error:", error);
+      let errorMessage = "Failed to get location. ";
+      
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          errorMessage += "Please enable location permissions in your browser settings.";
+          break;
+        case error.POSITION_UNAVAILABLE:
+          errorMessage += "Location information is unavailable.";
+          break;
+        case error.TIMEOUT:
+          errorMessage += "Location request timed out. Please try again.";
+          break;
+        default:
+          errorMessage += "Please try again.";
+      }
+      
+      setLocationError(errorMessage);
+      setLocationLoading(false);
+    }
   };
 
   // Validation functions
@@ -438,7 +506,7 @@ const SignupStore = () => {
     handleInputChange(field, numericValue);
   };
 
-  // ✅ CORRECTED SUBMISSION FUNCTION - SAME PATTERN AS DELIVERY
+  // ✅ CORRECTED SUBMISSION FUNCTION
   const handleSignUp = async (e) => {
     e.preventDefault();
     
@@ -481,7 +549,7 @@ const SignupStore = () => {
         countryCode: formValues.countryCode.trim(),
       };
 
-      // ✅ CORRECTED: Use simple field names like delivery signup
+      // ✅ CORRECTED: Use simple field names
       const files = {};
       
       if (documents.cnicFront) {
@@ -525,7 +593,7 @@ const SignupStore = () => {
     }
   };
 
-  // Image uploader - SAME PATTERN AS DELIVERY
+  // Image uploader
   const renderImageUploader = (title, type, isMultiple = false) => {
     const raw = documents[type];
     const images = isMultiple ? (Array.isArray(raw) ? raw : []) : raw;
@@ -632,7 +700,7 @@ const SignupStore = () => {
     );
   };
 
-  // Time selector modal - SAME AS DELIVERY
+  // Time selector modal
   const TimeSelectorModal = ({ isOpen, onClose, selectedTime, onTimeSelect, title }) => {
     if (!isOpen) return null;
 
@@ -764,7 +832,7 @@ const SignupStore = () => {
               </div>
             </div>
 
-            {/* Security PIN Section - SAME AS DELIVERY */}
+            {/* Security PIN Section */}
             <div className="form-section">
               <h3 className="section-title">Security PIN</h3>
 

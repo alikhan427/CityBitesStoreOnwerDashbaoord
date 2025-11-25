@@ -1,175 +1,529 @@
-.login-page {
+/* ======= CityBites Login - Corrected CSS ======= */
+.citybites-login-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #181818, #2d2d2d);
-  font-family: "Inter", sans-serif;
-  color: #fff;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #ff6b6b 0%, #764ba2 100%);
+  overflow: auto;
 }
 
-.login-container {
-  width: 400px;
-  background: #1f1f1f;
-  padding: 2.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-  text-align: center;
-}
-
-.login-logo {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 1rem;
-}
-
-.login-title {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 0.3rem;
-}
-
-.login-subtitle {
-  font-size: 0.95rem;
-  color: #bbb;
-  margin-bottom: 1.8rem;
-}
-
-.form-group {
-  margin-bottom: 1.4rem;
-  text-align: left;
-}
-
-label {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  color: #ddd;
-}
-
-.input-container {
-  display: flex;
-  align-items: center;
-  background: #2a2a2a;
-  border-radius: 8px;
-  padding: 0.6rem 0.8rem;
-}
-
-.input-container input {
+/* ======= Left Section ======= */
+.citybites-login-left {
   flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #fff;
-  font-size: 1rem;
-}
-
-.phone-input {
+  background: linear-gradient(135deg, #000000 0%, #2d3436 100%);
+  color: #ffffff;
   display: flex;
   align-items: center;
-}
-
-.country-code {
-  color: #ccc;
-  margin-right: 6px;
-  font-weight: 600;
-}
-
-.toggle-pin {
-  background: none;
-  border: none;
-  color: #ccc;
-  cursor: pointer;
-}
-
-.login-btn {
-  width: 100%;
-  background: #e91e63;
-  color: white;
-  padding: 0.8rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.citybites-login-left::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: float 20s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-20px, -20px) rotate(360deg); }
+}
+
+.citybites-login-left-content {
+  text-align: center;
+  z-index: 2;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.citybites-login-logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 30px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: #fff;
+}
+
+.citybites-login-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+  background: linear-gradient(135deg, #fff, #a8edea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.citybites-login-subtitle {
+  font-size: 1.1rem;
+  color: #b2bec3;
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+.citybites-login-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.citybites-login-feature-item {
+  display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 15px;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
 
-.login-btn:hover {
-  background: #ff2d75;
+.citybites-login-feature-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(10px);
 }
 
-.disabled-button {
-  opacity: 0.7;
-  cursor: not-allowed;
+.citybites-login-feature-icon { font-size: 1.2rem; }
+
+/* ======= Right Section ======= */
+.citybites-login-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 20px;
 }
 
-.error-text {
-  color: #ff4444;
-  font-size: 0.85rem;
+.citybites-login-container { width: 100%; max-width: 440px; padding: 10px; }
+
+.citybites-login-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
 }
 
-.success-text {
-  color: #4caf50;
+.citybites-login-card-header { text-align: center; margin-bottom: 40px; }
+
+.citybites-login-card-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3436;
+  margin: 0 0 10px 0;
+}
+
+.citybites-login-card-subtitle {
+  color: #636e72;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Input Groups */
+.citybites-login-input-group { margin-bottom: 30px; }
+
+.citybites-login-form-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #2d3436;
 }
 
-.loading-text {
-  color: #f1c40f;
-  font-size: 0.9rem;
+.citybites-login-input-wrapper {
+  position: relative;
+  border-radius: 12px;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
 }
 
-.signup-redirect {
-  margin-top: 1rem;
-  color: #bbb;
+.citybites-login-input-wrapper.focused { border-color: #ff6b6b; background: #ffffff; }
+.citybites-login-input-wrapper.error { border-color: #e74c3c; background: #fdf2f2; }
+.citybites-login-input-wrapper.valid { border-color: #10b981; background: #f0fdf4; }
+
+.citybites-login-form-input {
+  width: 100%;
+  padding: 16px 50px 16px 20px;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  color: #2d3436;
+  outline: none;
+  border-radius: 12px;
+  box-sizing: border-box;
 }
 
-.signup-redirect span {
-  color: #ff2d75;
-  cursor: pointer;
+.citybites-login-validation-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.valid-icon { color: #10b981; }
+.invalid-icon { color: #e74c3c; }
+
+.citybites-login-field-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 8px;
   font-weight: 500;
 }
-.signup-buttons {
-  margin-top: 20px;
-  text-align: center;
-}
 
-.role-buttons {
+/* PIN Section */
+.citybites-login-pin-container { position: relative; margin: 10px 0; }
+
+.citybites-login-pin-group {
   display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 10px;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
-.signup-btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
+.citybites-login-pin-group.error { background: #fdf2f2; padding: 10px; border-radius: 12px; }
+
+.citybites-login-pin-box {
+  width: 65px;
+  height: 65px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  background: #f8f9fa;
+  color: #2d3436;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.citybites-login-pin-box:focus {
+  border-color: #ff6b6b;
+  background: #ffffff;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+  outline: none;
+}
+
+.citybites-login-pin-toggle { display: flex; justify-content: flex-end; }
+
+.citybites-login-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(102, 126, 234, 0.1);
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  border-radius: 20px;
+  padding: 8px 16px;
+  color: #ff6b6b;
   cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
-.store-btn {
-  background-color: #4caf50;
-  color: white;
+.citybites-login-toggle-btn.visible { background: rgba(102, 126, 234, 0.2); }
+.citybites-login-toggle-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.citybites-login-toggle-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Submit Button */
+.citybites-login-btn {
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(135deg, #ff6b6b, #764ba2);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px 0 20px;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
 }
 
-.store-btn:hover {
-  background-color: #45a049;
+.citybites-login-btn:hover:not(.disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
 }
 
-.delivery-btn {
-  background-color: #2196f3;
-  color: white;
+.citybites-login-btn.disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* Spinner */
+.citybites-login-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Error Message */
+.citybites-login-error-message {
+  background: #fdf2f2;
+  border: 1px solid #fbd5d5;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.delivery-btn:hover {
-  background-color: #1976d2;
+.citybites-login-error-icon { color: #e74c3c; flex-shrink: 0; }
+.citybites-login-error-text { color: #e74c3c; font-weight: 500; margin: 0; }
+
+/* Footer */
+.citybites-login-card-footer {
+  text-align: center;
+  border-top: 1px solid #f1f3f4;
+  padding-top: 20px;
+}
+.citybites-login-support-text { font-size: 0.9rem; color: #555; margin-bottom: 12px; }
+.citybites-login-signup-buttons { display: flex; justify-content: center; gap: 12px; margin-top: 10px; }
+.citybites-login-signup-btn { border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; color: #fff; font-size: 0.9rem; }
+.store-btn { background: linear-gradient(135deg, #f75353, #f75353); }
+.delivery-btn { background: linear-gradient(135deg, #f75353, #f75353); }
+.citybites-login-signup-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+.citybites-login-security-notice { font-size: 0.75rem; color: #adb5bd; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 15px; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .citybites-login-wrapper { flex-direction: column; min-height: 100vh; height: auto; }
+  .citybites-login-left, .citybites-login-right { min-height: 50vh; }
+}
+@media (max-width: 768px) {
+  .citybites-login-card { padding: 30px 25px; margin: 10px 0; }
+  .citybites-login-pin-box { width: 55px; height: 55px; font-size: 1.3rem; }
+  .citybites-login-signup-buttons { flex-direction: column; gap: 10px; }
+  .citybites-login-signup-btn { width: 100%; }
+  .citybites-login-title { font-size: 2rem; }
+  .citybites-login-card-title { font-size: 1.7rem; }
+}
+@media (max-width: 480px) {
+  .citybites-login-pin-group { gap: 8px; }
+  .citybites-login-pin-box { width: 50px; height: 50px; font-size: 1.2rem; }
+  .citybites-login-toggle-btn { width: 100%; justify-content: center; }
+  .citybites-login-card { padding: 25px 20px; }
+  .citybites-login-left-content, .citybites-login-container { padding: 10px; }
+  .citybites-login-title { font-size: 1.8rem; }
+  .citybites-login-card-title { font-size: 1.5rem; }
+}
+/* ======= CityBites Login - CSS ======= */
+.citybites-login-wrapper {
+  display: flex;
+  min-height: 100vh;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #ff6b6b 0%, #764ba2 100%);
+  overflow: auto;
+}
+
+/* Left */
+.citybites-login-left {
+  flex: 1;
+  background: linear-gradient(135deg, #000000 0%, #2d3436 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.citybites-login-left::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: float 20s linear infinite;
+}
+@keyframes float { 0% { transform: translate(0, 0) rotate(0deg); } 100% { transform: translate(-20px, -20px) rotate(360deg); } }
+
+.citybites-login-left-content { text-align: center; z-index: 2; max-width: 400px; padding: 20px; }
+
+.citybites-login-logo { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 30px; border: 3px solid rgba(255,255,255,0.1); box-shadow: 0 8px 32px rgba(0,0,0,0.3); background: #fff; }
+.citybites-login-title { font-size: 2.5rem; font-weight: 700; margin: 0 0 15px 0; background: linear-gradient(135deg, #fff, #a8edea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.citybites-login-subtitle { font-size: 1.1rem; color: #b2bec3; margin-bottom: 40px; line-height: 1.5; }
+
+.citybites-login-feature-list { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
+.citybites-login-feature-item { display:flex; align-items:center; gap:15px; padding:15px 20px; background: rgba(255,255,255,0.05); border-radius:12px; border:1px solid rgba(255,255,255,0.1); transition: all .3s; }
+.citybites-login-feature-item:hover { transform: translateX(10px); background: rgba(255,255,255,0.1); }
+.citybites-login-feature-icon { font-size: 1.2rem; }
+
+/* Right */
+.citybites-login-right { flex: 1; display:flex; align-items:center; justify-content:center; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); padding:20px; }
+.citybites-login-container { width:100%; max-width:440px; padding:10px; }
+.citybites-login-card { background:#ffffff; border-radius:20px; padding:40px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+.citybites-login-card-header { text-align:center; margin-bottom:40px; }
+.citybites-login-card-title { font-size:2rem; font-weight:700; color:#2d3436; margin:0 0 10px 0; }
+.citybites-login-card-subtitle { color:#636e72; font-size:0.95rem; margin:0; }
+
+/* Input Groups */
+.citybites-login-input-group { margin-bottom:30px; }
+.citybites-login-form-label { display:flex; align-items:center; gap:8px; font-size:0.9rem; font-weight:600; margin-bottom:10px; color:#2d3436; }
+
+.citybites-login-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 12px;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+  padding: 0;
+  overflow: hidden;
+}
+
+.citybites-login-input-wrapper.focused { border-color: #ff6b6b; background: #ffffff; }
+.citybites-login-input-wrapper.error { border-color: #e74c3c; background: #fdf2f2; }
+.citybites-login-input-wrapper.valid { border-color: #10b981; background: #f0fdf4; }
+
+.country-code-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 12px;
+  background: transparent;
+  font-weight: 700;
+  color: #2d3436;
+  border-right: 1px solid rgba(0,0,0,0.04);
+  user-select: none;
+  cursor: text;
+  min-width: 64px;
+  box-sizing: border-box;
+}
+
+.citybites-login-form-input {
+  flex: 1;
+  padding: 16px 20px;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  color: #2d3436;
+  outline: none;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+
+.citybites-login-validation-icon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); }
+.valid-icon { color: #10b981; }
+.invalid-icon { color: #e74c3c; }
+
+.citybites-login-field-error { display:flex; align-items:center; gap:6px; color:#e74c3c; font-size:0.8rem; margin-top:8px; font-weight:500; }
+
+/* PIN Section */
+.citybites-login-pin-container { position: relative; margin: 10px 0; }
+.citybites-login-pin-group { display:flex; gap:12px; justify-content:space-between; margin-bottom:15px; }
+.citybites-login-pin-group.error { background:#fdf2f2; padding:10px; border-radius:12px; }
+
+.citybites-login-pin-box {
+  width: 65px;
+  height: 65px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  background: #f8f9fa;
+  color: #2d3436;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.citybites-login-pin-box:focus { border-color: #ff6b6b; background: #ffffff; box-shadow: 0 4px 15px rgba(102,126,234,0.2); outline: none; }
+
+.citybites-login-pin-toggle { display:flex; justify-content:flex-end; }
+.citybites-login-toggle-btn { display:flex; align-items:center; gap:8px; background: rgba(102,126,234,0.1); border:1px solid rgba(102,126,234,0.2); border-radius:20px; padding:8px 16px; color:#ff6b6b; cursor:pointer; transition: all 0.3s ease; font-size:0.85rem; font-weight:600; }
+.citybites-login-toggle-btn.visible { background: rgba(102,126,234,0.2); }
+.citybites-login-toggle-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.citybites-login-toggle-btn:disabled { opacity:0.6; cursor:not-allowed; }
+
+/* Submit */
+.citybites-login-btn {
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(135deg, #ff6b6b, #764ba2);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin:30px 0 20px;
+  box-shadow: 0 8px 25px rgba(102,126,234,0.3);
+  transition: all 0.3s ease;
+}
+.citybites-login-btn.disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.citybites-login-btn:hover:not(.disabled) { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(102,126,234,0.4); }
+
+.citybites-login-spinner { width:18px; height:18px; border:2px solid transparent; border-top:2px solid white; border-radius:50%; animation:spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Error message */
+.citybites-login-error-message { background:#fdf2f2; border:1px solid #fbd5d5; border-radius:12px; padding:16px; margin-bottom:25px; display:flex; align-items:center; gap:12px; }
+.citybites-login-error-icon { color:#e74c3c; flex-shrink:0; }
+.citybites-login-error-text { color:#e74c3c; font-weight:500; margin:0; }
+
+/* Footer */
+.citybites-login-card-footer { text-align:center; border-top:1px solid #f1f3f4; padding-top:20px; }
+.citybites-login-support-text { font-size:0.9rem; color:#555; margin-bottom:12px; }
+.citybites-login-signup-buttons { display:flex; justify-content:center; gap:12px; margin-top:10px; }
+.citybites-login-signup-btn { border:none; padding:10px 18px; border-radius:8px; cursor:pointer; font-weight:600; transition: all .3s; color:#fff; font-size:0.9rem; }
+.store-btn { background: linear-gradient(135deg, #f75353, #f75353); }
+.delivery-btn { background: linear-gradient(135deg, #f75353, #f75353); }
+.citybites-login-signup-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+.citybites-login-security-notice { font-size:0.75rem; color:#adb5bd; display:flex; align-items:center; justify-content:center; gap:6px; margin-top:15px; }
+
+/* Responsive */
+@media (max-width:1024px) {
+  .citybites-login-wrapper { flex-direction: column; min-height: 100vh; height: auto; }
+  .citybites-login-left, .citybites-login-right { min-height: 50vh; }
+}
+@media (max-width:768px) {
+  .citybites-login-card { padding: 30px 25px; margin: 10px 0; }
+  .citybites-login-pin-box { width:55px; height:55px; font-size:1.3rem; }
+  .citybites-login-signup-buttons { flex-direction: column; gap:10px; }
+  .citybites-login-signup-btn { width:100%; }
+  .citybites-login-title { font-size:2rem; }
+  .citybites-login-card-title { font-size:1.7rem; }
+}
+@media (max-width:480px) {
+  .citybites-login-pin-group { gap:8px; }
+  .citybites-login-pin-box { width:50px; height:50px; font-size:1.2rem; }
+  .citybites-login-toggle-btn { width:100%; justify-content:center; }
+  .citybites-login-card { padding:25px 20px; }
+  .citybites-login-left-content, .citybites-login-container { padding:10px; }
+  .citybites-login-title { font-size:1.8rem; }
+  .citybites-login-card-title { font-size:1.5rem; }
 }

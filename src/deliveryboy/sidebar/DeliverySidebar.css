@@ -1,0 +1,214 @@
+/* ===== Delivery Sidebar Base ===== */
+.delivery-sidebar {
+  width: 250px;
+  height: 100vh;
+  background: #fff;
+  color: #333;
+  border-right: 1px solid #e0e0e0;
+  padding: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  margin-top: -20px;
+}
+
+/* Hidden sidebar for mobile initially */
+.delivery-sidebar.closed {
+  transform: translateX(-100%);
+}
+
+/* Open sidebar for mobile */
+.delivery-sidebar.open {
+  transform: translateX(0);
+}
+
+/* Desktop always open */
+.delivery-sidebar.desktop-open {
+  transform: translateX(0);
+}
+
+/* Delivery Sidebar Header */
+.delivery-sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+}
+
+.delivery-brand {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.close-delivery-sidebar-mobile {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+  padding: 5px;
+}
+
+.close-delivery-sidebar-mobile:hover {
+  color: #333;
+}
+
+/* Delivery Menu Container */
+.delivery-menu {
+  list-style: none;
+  padding: 20px 0;
+  margin: 0;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.delivery-menu li {
+  margin: 5px 0;
+}
+
+.delivery-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  color: #555;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.delivery-nav-link svg {
+  font-size: 18px;
+  width: 20px;
+  color: #666;
+}
+
+.delivery-nav-link:hover {
+  background: #f8f9fa;
+  color: #2c3e50;
+  border-left-color: #667eea;
+}
+
+.delivery-nav-link:hover svg {
+  color: #667eea;
+}
+
+.delivery-nav-link.active {
+  background: #f0f4ff;
+  color: #667eea;
+  border-left-color: #667eea;
+  font-weight: 600;
+}
+
+.delivery-nav-link.active svg {
+  color: #667eea;
+}
+
+/* Delivery Sidebar Footer */
+.delivery-sidebar-footer {
+  margin-top: auto;
+  padding: 10px 0;
+  border-top: 1px solid #e0e0e0;
+  background: #f8f9fa;
+}
+
+/* Delivery Logout Button */
+.delivery-logout-button {
+  width: 100%;
+  padding: 12px 20px;
+  background: transparent;
+  border: none;
+  color: #e74c3c;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+  text-align: left;
+}
+
+.delivery-logout-button:hover {
+  background: rgba(231, 76, 60, 0.1);
+  color: #c0392b;
+  border-left-color: #e74c3c;
+}
+
+/* ===== Mobile Toggle Button ===== */
+.delivery-mobile-toggle {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 3000;
+  background: #fff;
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  cursor: pointer;
+  font-size: 18px;
+  border: 1px solid #e0e0e0;
+}
+
+.delivery-mobile-toggle:hover {
+  background: #f8f9fa;
+}
+
+/* Overlay for mobile when sidebar is open */
+.delivery-sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* ===== Mobile Responsive ===== */
+@media screen and (max-width: 768px) {
+  .delivery-mobile-toggle {
+    display: block;
+  }
+  
+  .delivery-sidebar-overlay {
+    display: block;
+  }
+  
+  .delivery-sidebar {
+    width: 280px;
+    transform: translateX(-100%);
+  }
+  
+  .delivery-sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+/* ===== Scrollbar Styling ===== */
+.delivery-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.delivery-menu::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.1);
+  border-radius: 3px;
+}
+
+.delivery-menu::-webkit-scrollbar-track {
+  background: transparent;
+}

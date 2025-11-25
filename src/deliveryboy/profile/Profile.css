@@ -1,0 +1,205 @@
+/* Profile.css for delivery partner profile page (place next to Profile.jsx) */
+
+:root {
+  --card-bg: #fff;
+  --muted: #6b7280;
+  --accent: #667eea;
+  --card-radius: 10px;
+}
+
+.dbp-page {
+  padding: 24px;
+  min-height: calc(100vh - 60px);
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+.dbp-card {
+  max-width: 960px;
+  margin: 16px auto;
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  border: 1px solid #e6e9ee;
+  padding: 20px;
+  box-shadow: 0 8px 30px rgba(12, 15, 20, 0.03);
+}
+
+.dbp-card h2 {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+  color: #0f172a;
+}
+
+.dbp-msg {
+  background: #eef2ff;
+  border: 1px solid #dbeafe;
+  color: #0f172a;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+/* grid */
+.dbp-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 18px;
+}
+
+.dbp-left, .dbp-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dbp-row label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.dbp-row input[type="text"],
+.dbp-row input[type="email"],
+.dbp-row input[type="password"],
+.dbp-row select {
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* avatar block */
+.dbp-avatar-block {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.dbp-avatar-preview {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.dbp-avatar-placeholder {
+  width: 96px;
+  height: 96px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  font-size: 26px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.dbp-avatar-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 220px;
+}
+
+.dbp-avatar-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* password row */
+.password-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.show-pass {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* actions */
+.dbp-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.left-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.right-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* buttons */
+.btn {
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: #5b6be6;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+}
+
+.btn.danger {
+  background: #fff7f6;
+  color: #c0392b;
+  border-color: #f5c6c0;
+}
+
+/* errors */
+.field-error {
+  color: #c0392b;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+/* responsive */
+@media (max-width: 920px) {
+  .dbp-grid { grid-template-columns: 1fr; }
+  .dbp-right { order: 2; }
+  .dbp-left { order: 1; }
+  .dbp-avatar-preview, .dbp-avatar-placeholder { width: 80px; height: 80px; }
+  .dbp-card { padding: 14px; margin: 8px; }
+  .dbp-actions { flex-direction: column; gap: 8px; align-items: stretch; }
+}
