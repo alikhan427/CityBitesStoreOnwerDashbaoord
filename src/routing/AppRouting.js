@@ -349,18 +349,21 @@
 // }
  
 /// src/routing/AppRouting.js
+// src/routing/AppRouting.js
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadAuthState } from "../redux/slices/authSlice";
 
-import Login from "../pages/login/Login";
+/** AUTH PAGES (exact case matters on Netlify) */
+import Login from "../pages/login/Login";            // requires: src/pages/login/Login.(jsx|js|tsx)
 import SignupStore from "../pages/register/SignupStore";
 import SignupDelivery from "../pages/register/SignupDelivery";
 
-/* Store owner pages */
+/** STORE OWNER PAGES */
 import Dashboard from "../storeowner/dashboard/Dashboard";
 import Orders from "../storeowner/orders/Orders";
+/* If your files are capitalized, make sure paths are exactly like below: */
 import Menu from "../storeowner/menu/menu";
 import Offers from "../storeowner/offers/offers";
 import StorePayments from "../storeowner/payments/Payments";
@@ -370,7 +373,7 @@ import StoreProfile from "../storeowner/profile/Profile";
 import Sidebar from "../storeowner/sidebar/Sidebar";
 import Navbar from "../storeowner/navbar/Navbar";
 
-/* Delivery pages */
+/** DELIVERY PAGES */
 import DeliverySidebar from "../deliveryboy/sidebar/DeliverySidebar";
 import DeliveryNavbar from "../deliveryboy/navbar/DeliveryNavbar";
 import Active from "../deliveryboy/active/Active";
@@ -381,7 +384,7 @@ import Performance from "../deliveryboy/performance/Performance";
 import Support from "../deliveryboy/support/Support";
 import DeliveryProfile from "../deliveryboy/profile/Profile";
 
-import "./AppRouting.css"; // Import the CSS
+import "./AppRouting.css";
 
 export default function AppRouting() {
   const dispatch = useDispatch();
@@ -392,7 +395,7 @@ export default function AppRouting() {
 
   useEffect(() => {
     let mounted = true;
-    const initialize = async () => {
+    (async () => {
       try {
         await dispatch(loadAuthState());
       } catch (e) {
@@ -400,8 +403,7 @@ export default function AppRouting() {
       } finally {
         if (mounted) setAuthChecked(true);
       }
-    };
-    initialize();
+    })();
     return () => {
       mounted = false;
     };
@@ -412,14 +414,13 @@ export default function AppRouting() {
   try {
     const raw = localStorage.getItem("user");
     storedUser = raw ? JSON.parse(raw) : null;
-  } catch (e) {
+  } catch {
     storedUser = null;
   }
   const user = auth.user ?? storedUser;
   const rawRole = (user?.role || "").toString().toLowerCase();
   const normalizedRole = rawRole.replace(/[-\s]+/g, "_").trim();
 
-  // Wait until auth restoration completes
   if (!authChecked || loading) {
     return (
       <div className="loading-container">
@@ -428,15 +429,19 @@ export default function AppRouting() {
     );
   }
 
-  // Helper guard component to protect role-specific routes
+  // Guard for role-protected routes
   const RequireRole = ({ allowedRoles = [], children }) => {
     const role = normalizedRole;
     const ok = allowedRoles.some((r) => role.includes(r) || role === r);
     return ok ? children : <Navigate to="/dashboard" replace />;
   };
 
-  // STORE OWNER layout (role contains 'store' or 'owner')
-  if (normalizedRole.includes("store") || normalizedRole.includes("owner") || normalizedRole === "store_owner") {
+  // STORE OWNER layout
+  if (
+    normalizedRole.includes("store") ||
+    normalizedRole.includes("owner") ||
+    normalizedRole === "store_owner"
+  ) {
     return (
       <div className="store-owner-layout">
         <Navbar isAuthenticated />
@@ -492,8 +497,7 @@ export default function AppRouting() {
                   </RequireRole>
                 }
               />
-
-              {/* Store owner profile route */}
+              {/* Store owner profile */}
               <Route
                 path="/store-owner/profile"
                 element={
@@ -502,8 +506,7 @@ export default function AppRouting() {
                   </RequireRole>
                 }
               />
-
-              {/* ALLOW store owners to access delivery signup page */}
+              {/* Allow store owners to access delivery signup */}
               <Route
                 path="/signup-delivery"
                 element={
@@ -512,11 +515,9 @@ export default function AppRouting() {
                   </RequireRole>
                 }
               />
-
               {/* Prevent visiting other auth pages when logged in */}
               <Route path="/login" element={<Navigate to="/dashboard" replace />} />
               <Route path="/signup-store" element={<Navigate to="/dashboard" replace />} />
-
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
@@ -526,15 +527,24 @@ export default function AppRouting() {
     );
   }
 
-  // DELIVERY layout (role contains 'delivery' or 'driver')
-  if (normalizedRole.includes("delivery") || normalizedRole.includes("driver") || normalizedRole === "delivery_boy") {
-    // Check if delivery components are available
+  // DELIVERY layout
+  if (
+    normalizedRole.includes("delivery") ||
+    normalizedRole.includes("driver") ||
+    normalizedRole === "delivery_boy"
+  ) {
     if (typeof DeliverySidebar === "undefined" || typeof DeliveryNavbar === "undefined") {
       return (
         <div className="component-error-container">
           <h2>Delivery Components Import Problem</h2>
           <p>Please check your delivery component imports.</p>
-          <pre>{JSON.stringify({ DeliverySidebar: typeof DeliverySidebar, DeliveryNavbar: typeof DeliveryNavbar }, null, 2)}</pre>
+          <pre>
+            {JSON.stringify(
+              { DeliverySidebar: typeof DeliverySidebar, DeliveryNavbar: typeof DeliveryNavbar },
+              null,
+              2
+            )}
+          </pre>
         </div>
       );
     }
@@ -602,8 +612,7 @@ export default function AppRouting() {
                   </RequireRole>
                 }
               />
-
-              {/* Delivery profile route */}
+              {/* Delivery profile */}
               <Route
                 path="/delivery/profile"
                 element={
@@ -612,12 +621,10 @@ export default function AppRouting() {
                   </RequireRole>
                 }
               />
-
               {/* Prevent visiting auth pages when logged in */}
               <Route path="/login" element={<Navigate to="/dashboard" replace />} />
               <Route path="/signup-store" element={<Navigate to="/dashboard" replace />} />
               <Route path="/signup-delivery" element={<Navigate to="/dashboard" replace />} />
-
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
@@ -627,7 +634,7 @@ export default function AppRouting() {
     );
   }
 
-  // PUBLIC routes (unauthenticated users)
+  // PUBLIC routes (unauthenticated)
   if (!isAuthenticated) {
     return (
       <Routes>
@@ -640,7 +647,7 @@ export default function AppRouting() {
     );
   }
 
-  // Fallback: unknown role (send back to login)
+  // Fallback: unknown role
   return (
     <Routes>
       <Route path="*" element={<Navigate to="/login" replace />} />
