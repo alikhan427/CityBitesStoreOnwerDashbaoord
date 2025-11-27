@@ -1,0 +1,263 @@
+/* ===== AppRouting Layout Styles ===== */
+.app-routing-container {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ===== Common Layout Variables ===== */
+:root {
+  --navbar-height: 60px;
+  --sidebar-width: 250px;
+  --sidebar-width-tablet: 220px;
+  --sidebar-width-mobile: 280px;
+  --mobile-toggle-size: 44px;
+}
+
+/* ===== Loading State ===== */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f8f9fa;
+}
+
+.loading-container h3 {
+  color: #2c3e50;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* ===== Store Owner Layout ===== */
+.store-owner-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.store-owner-main-wrapper {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.store-owner-main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding-top: var(--navbar-height);
+  padding: 16px;
+  min-height: calc(100vh - var(--navbar-height));
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  width: calc(100% - var(--sidebar-width));
+  box-sizing: border-box;
+}
+
+/* ===== Delivery Boy Layout ===== */
+.delivery-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.delivery-main-wrapper {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.delivery-main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding-top: var(--navbar-height);
+  padding: 16px;
+  min-height: calc(100vh - var(--navbar-height));
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  width: calc(100% - var(--sidebar-width));
+  box-sizing: border-box;
+}
+
+/* Simple delivery header fallback */
+.delivery-header-fallback {
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.delivery-header-fallback h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.delivery-simple-main {
+  padding-top: var(--navbar-height);
+  padding: 16px;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+/* ===== Error State ===== */
+.component-error-container {
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  margin: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.component-error-container h2 {
+  color: #dc3545;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+.component-error-container pre {
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 12px;
+  border: 1px solid #e9ecef;
+}
+
+/* ===== Responsive Design ===== */
+
+/* Tablet Devices (769px - 1024px) */
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: var(--sidebar-width-tablet);
+  }
+  
+  .store-owner-main-content,
+  .delivery-main-content {
+    margin-left: var(--sidebar-width-tablet);
+    width: calc(100% - var(--sidebar-width-tablet));
+    padding: 14px;
+  }
+}
+
+/* Mobile Devices (768px and below) */
+@media (max-width: 768px) {
+  .store-owner-main-content,
+  .delivery-main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 12px;
+    padding-top: calc(var(--navbar-height) + 12px);
+  }
+  
+  /* Adjust padding when sidebar is hidden on mobile */
+  .store-owner-layout.mobile-sidebar-open .store-owner-main-content,
+  .delivery-layout.mobile-sidebar-open .delivery-main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .delivery-simple-main {
+    padding: 12px;
+    padding-top: calc(var(--navbar-height) + 12px);
+  }
+  
+  .component-error-container {
+    margin: 12px;
+    padding: 20px;
+  }
+  
+  .component-error-container h2 {
+    font-size: 18px;
+  }
+}
+
+/* Small Mobile Devices (480px and below) */
+@media (max-width: 480px) {
+  :root {
+    --navbar-height: 56px;
+    --sidebar-width-mobile: 100%;
+  }
+  
+  .store-owner-main-content,
+  .delivery-main-content,
+  .delivery-simple-main {
+    padding: 10px;
+    padding-top: calc(var(--navbar-height) + 10px);
+  }
+  
+  .loading-container h3 {
+    font-size: 16px;
+  }
+  
+  .delivery-header-fallback {
+    padding: 0 12px;
+  }
+  
+  .delivery-header-fallback h3 {
+    font-size: 16px;
+  }
+  
+  .component-error-container {
+    margin: 10px;
+    padding: 16px;
+  }
+  
+  .component-error-container h2 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .component-error-container pre {
+    padding: 12px;
+    font-size: 11px;
+  }
+}
+
+/* Large Desktop Screens (1440px and above) */
+@media (min-width: 1440px) {
+  .store-owner-main-content,
+  .delivery-main-content {
+    padding: 20px;
+  }
+  
+  .delivery-simple-main {
+    padding: 20px;
+    padding-top: calc(var(--navbar-height) + 20px);
+  }
+}
+
+/* ===== Animation Support ===== */
+@media (prefers-reduced-motion: reduce) {
+  .store-owner-main-content,
+  .delivery-main-content {
+    transition: none;
+  }
+}
+
+/* ===== High Contrast Mode ===== */
+@media (prefers-contrast: high) {
+  .store-owner-main-content,
+  .delivery-main-content,
+  .delivery-simple-main {
+    background: #fff;
+    border: 1px solid #000;
+  }
+  
+  .component-error-container {
+    border: 2px solid #000;
+  }
+  
+  .delivery-header-fallback {
+    border-bottom: 2px solid #000;
+  }
+}

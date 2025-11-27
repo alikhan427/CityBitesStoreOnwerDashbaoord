@@ -13,7 +13,6 @@ import { FiArrowLeft, FiX } from "react-icons/fi";
 import "./Sidebar.css";
 
 import { useDispatch, useSelector } from "react-redux";
-// your authSlice exports 'logout' — use that
 import { logout } from "../../redux/slices/authSlice";
 
 const Sidebar = () => {
@@ -21,68 +20,64 @@ const Sidebar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  // use Redux as the single source of truth for auth
   const isAuth = useSelector((state) => !!state.auth?.isAuthenticated);
-
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
-  // Sync auth across tabs: if token removed in another tab, dispatch logout
-  useEffect(() => {
-    const onStorage = (e) => {
-      if (e.key === "token" && !e.newValue) {
-        // token removed in another tab -> update redux
-        try {
-          dispatch(logout());
-        } catch (err) {
-          // ignore
-        }
-      }
-    };
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
-  }, [dispatch]);
-
-  // Check if device is mobile
+  // Enhanced screen size detection
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      const width = window.innerWidth;
+      setIsMobile(width <= 768);
+      setIsTablet(width > 768 && width <= 1024);
     };
 
     checkScreenSize();
     window.addEventListener("resize", checkScreenSize);
+    
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  // Auto-close sidebar when route changes on mobile
+  // Sync auth across tabs
   useEffect(() => {
-    if (isMobile) {
+    const onStorage = (e) => {
+      if (e.key === "token" && !e.newValue) {
+        try {
+          dispatch(logout());
+        } catch (err) {
+          console.error("Logout error:", err);
+        }
+      }
+    };
+    
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, [dispatch]);
+
+  // Auto-close sidebar when route changes on mobile/tablet
+  useEffect(() => {
+    if (isMobile || isTablet) {
       setIsSidebarOpen(false);
     }
-  }, [location.pathname, isMobile]);
+  }, [location.pathname, isMobile, isTablet]);
 
-  // Logout: clear localStorage + update redux + navigate to login
   const handleLogout = () => {
     const ok = window.confirm("Are you sure you want to logout?");
     if (!ok) return;
 
-    // remove token/user from localStorage
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-
-    // update redux (use the exported 'logout' action)
     dispatch(logout());
-
-    // redirect to login
     navigate("/login", { replace: true });
   };
 
   const toggleSidebar = () => {
-    setIsSidebarOpen((s) => !s);
+    setIsSidebarOpen((prev) => !prev);
   };
 
   const closeSidebar = () => {
-    if (isMobile) {
+    if (isMobile || isTablet) {
       setIsSidebarOpen(false);
     }
   };
@@ -90,92 +85,103 @@ const Sidebar = () => {
   // If not authenticated, do not render the sidebar
   if (!isAuth) return null;
 
+  // Determine sidebar state based on device type
+  const getSidebarState = () => {
+    if (isMobile || isTablet) {
+      return isSidebarOpen ? "open" : "closed";
+    }
+    return "desktop-open";
+  };
+
+  // Navigation items for better maintainability
+  const navItems = [
+    { to: "/dashboard", icon: FaHome, label: "Dashboard", exact: true },
+    { to: "/orders", icon: FaShoppingBag, label: "Orders" },
+    { to: "/menu", icon: TfiMenuAlt, label: "Menu" },
+    { to: "/offers", icon: BsPercent, label: "Offers" },
+    { to: "/payments", icon: PiChartLine, label: "Payments" },
+    { to: "/delivery", icon: FaMotorcycle, label: "Delivery" },
+  ];
+
+  const isActiveLink = (to, exact = false) => {
+    if (exact) {
+      return location.pathname === to;
+    }
+    return location.pathname.startsWith(to);
+  };
+
   return (
     <>
-      {/* Mobile Toggle Button */}
-      {isMobile && (
-        <div className="mobile-toggle" onClick={toggleSidebar}>
+      {/* Mobile/Tablet Toggle Button */}
+      {(isMobile || isTablet) && (
+        <button 
+          className="mobile-toggle" 
+          onClick={toggleSidebar}
+          aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isSidebarOpen}
+        >
           {isSidebarOpen ? <FiX /> : <FaBars />}
-        </div>
+        </button>
       )}
 
-      {/* Overlay for mobile when sidebar is open */}
-      {isMobile && isSidebarOpen && (
-        <div className="sidebar-overlay" onClick={closeSidebar}></div>
+      {/* Overlay for mobile/tablet when sidebar is open */}
+      {(isMobile || isTablet) && isSidebarOpen && (
+        <div 
+          className="sidebar-overlay" 
+          onClick={closeSidebar}
+          aria-hidden="true"
+        />
       )}
 
       {/* Sidebar */}
-      <aside className={`sidebar ${isMobile ? (isSidebarOpen ? "open" : "closed") : "desktop-open"}`}>
+      <aside 
+        className={`sidebar ${getSidebarState()}`}
+        role="navigation"
+        aria-label="Main navigation"
+      >
         <div className="sidebar-header">
           <h2 className="brand">CityBites</h2>
-          {isMobile && (
-            <button className="close-sidebar-mobile" onClick={closeSidebar}>
+          {(isMobile || isTablet) && (
+            <button 
+              className="close-sidebar-mobile" 
+              onClick={closeSidebar}
+              aria-label="Close sidebar"
+            >
               <FiX />
             </button>
           )}
         </div>
 
-        <ul className="menu">
-          <li>
-            <Link
-              to="/dashboard"
-              className={`nav-link ${location.pathname === "/dashboard" ? "active" : ""}`}
-              onClick={closeSidebar}
-            >
-              <FaHome /> <span>Dashboard</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/orders"
-              className={`nav-link ${location.pathname.startsWith("/orders") ? "active" : ""}`}
-              onClick={closeSidebar}
-            >
-              <FaShoppingBag /> <span>Orders</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/menu"
-              className={`nav-link ${location.pathname.startsWith("/menu") ? "active" : ""}`}
-              onClick={closeSidebar}
-            >
-              <TfiMenuAlt /> <span>Menu</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/offers"
-              className={`nav-link ${location.pathname.startsWith("/offers") ? "active" : ""}`}
-              onClick={closeSidebar}
-            >
-              <BsPercent /> <span>Offers</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/payments"
-              className={`nav-link ${location.pathname.startsWith("/payments") ? "active" : ""}`}
-              onClick={closeSidebar}
-            >
-              <PiChartLine /> <span>Payments</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/delivery"
-              className={`nav-link ${location.pathname.startsWith("/delivery") ? "active" : ""}`}
-              onClick={closeSidebar}
-            >
-              <FaMotorcycle /> <span>Delivery</span>
-            </Link>
-          </li>
-        </ul>
+        <nav>
+          <ul className="menu">
+            {navItems.map((item) => {
+              const IconComponent = item.icon;
+              return (
+                <li key={item.to}>
+                  <Link
+                    to={item.to}
+                    className={`nav-link ${isActiveLink(item.to, item.exact) ? "active" : ""}`}
+                    onClick={closeSidebar}
+                    aria-current={isActiveLink(item.to, item.exact) ? "page" : undefined}
+                  >
+                    <IconComponent aria-hidden="true" /> 
+                    <span>{item.label}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
 
         {/* Logout Button at the bottom */}
         <div className="sidebar-footer">
-          <button className="logout-button" onClick={handleLogout}>
-            <FiArrowLeft /> <span>Logout</span>
+          <button 
+            className="logout-button" 
+            onClick={handleLogout}
+            aria-label="Logout"
+          >
+            <FiArrowLeft aria-hidden="true" /> 
+            <span>Logout</span>
           </button>
         </div>
       </aside>

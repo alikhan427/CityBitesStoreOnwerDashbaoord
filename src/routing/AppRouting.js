@@ -348,7 +348,7 @@
 //   );
 // }
  
-// src/routing/AppRouting.js
+/// src/routing/AppRouting.js
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -380,6 +380,8 @@ import DeliveryPayments from "../deliveryboy/payments/Payments";
 import Performance from "../deliveryboy/performance/Performance";
 import Support from "../deliveryboy/support/Support";
 import DeliveryProfile from "../deliveryboy/profile/Profile";
+
+import "./AppRouting.css"; // Import the CSS
 
 export default function AppRouting() {
   const dispatch = useDispatch();
@@ -420,7 +422,7 @@ export default function AppRouting() {
   // Wait until auth restoration completes
   if (!authChecked || loading) {
     return (
-      <div style={{ padding: 20, display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+      <div className="loading-container">
         <h3>Loading...</h3>
       </div>
     );
@@ -433,29 +435,14 @@ export default function AppRouting() {
     return ok ? children : <Navigate to="/dashboard" replace />;
   };
 
-  // Constants for layout spacing
-  const NAVBAR_HEIGHT = 60;
-  const SIDEBAR_WIDTH = 250;
-
   // STORE OWNER layout (role contains 'store' or 'owner')
   if (normalizedRole.includes("store") || normalizedRole.includes("owner") || normalizedRole === "store_owner") {
     return (
-      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <div className="store-owner-layout">
         <Navbar isAuthenticated />
-        <div style={{ display: "flex", flex: 1 }}>
+        <div className="store-owner-main-wrapper">
           <Sidebar />
-          <main
-            style={{
-              marginLeft: `${SIDEBAR_WIDTH}px`,
-              paddingTop: `${NAVBAR_HEIGHT}px`,
-              padding: 12,
-              width: "100%",
-              minHeight: "100vh",
-              backgroundColor: "#f8f9fa",
-              boxSizing: "border-box",
-              
-            }}
-          >
+          <main className="store-owner-main-content">
             <Routes>
               <Route
                 path="/dashboard"
@@ -544,7 +531,7 @@ export default function AppRouting() {
     // Check if delivery components are available
     if (typeof DeliverySidebar === "undefined" || typeof DeliveryNavbar === "undefined") {
       return (
-        <div style={{ padding: 24 }}>
+        <div className="component-error-container">
           <h2>Delivery Components Import Problem</h2>
           <p>Please check your delivery component imports.</p>
           <pre>{JSON.stringify({ DeliverySidebar: typeof DeliverySidebar, DeliveryNavbar: typeof DeliveryNavbar }, null, 2)}</pre>
@@ -553,22 +540,11 @@ export default function AppRouting() {
     }
 
     return (
-      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <div className="delivery-layout">
         <DeliveryNavbar />
-        <div style={{ display: "flex", flex: 1 }}>
+        <div className="delivery-main-wrapper">
           <DeliverySidebar />
-          <main
-            style={{
-              marginLeft: `${SIDEBAR_WIDTH}px`,
-              paddingTop: `${NAVBAR_HEIGHT}px`,
-              padding: 12,
-              width: "100%",
-              minHeight: "100vh",
-              backgroundColor: "#f8f9fa",
-              boxSizing: "border-box",
-
-            }}
-          >
+          <main className="delivery-main-content">
             <Routes>
               <Route
                 path="/dashboard"
